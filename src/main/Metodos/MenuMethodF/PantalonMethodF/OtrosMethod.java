@@ -1,7 +1,5 @@
 package main.Metodos.MenuMethodF.PantalonMethodF;
 
-import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
 
 import main.Clases.Products.PantalonF.Otros;
@@ -11,41 +9,46 @@ public class OtrosMethod {
 
     static int selectPantalon = 0;
 
-    static ArrayList<Otros> otrosArray = new ArrayList<>();
+    static Otros[] otrosArray = new Otros[3];
+
+    static int almacen = 0;
 
     public static void pantalonOtros(){
         do{
             //Try catch para evitar que el programa termine si hay un error
             try{
-                selectPantalon = Integer.parseInt(JOptionPane.showInputDialog(null,"""
-                        1. Insertar
-                        2. Borrar
-                        3. Buscar
-                        4. Imprimir
-                        5. Editar
-                        6. Salir
-                        ""","Ingrese un numero"));
+                Object[] options = {"Insertar", "Borrar", "Buscar", "Imprimir", "Editar", "Regresar"};
+
+                selectPantalon = JOptionPane.showOptionDialog(null,
+                        "Seleccione una opción:",
+                        "Zapato Tenis Menu",
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE,
+                        null,
+                        options,
+                        options[0]);
 
                 switch(selectPantalon){
-                    case 1:
+                    case 0:
                     inputPantalonOtros();
                     break;
 
+                    case 1:
+                    break;
+
                     case 2:
+                    findPantalonOtros();
                     break;
 
                     case 3:
-                    break;
-
-                    case 4:
                     printPantalonOtros();
                     break;
                     
-                    case 5:
+                    case 4:
                     
                     break;
 
-                    case 6:
+                    case 5:
                     PantalonMethod.pantalon();
                     return;
                         
@@ -54,36 +57,87 @@ public class OtrosMethod {
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null,"Ups! Error!");
             }
-        } while(selectPantalon != 6);
+        } while(selectPantalon != 5);
     }
 
     public static void inputPantalonOtros(){
 
-        int count = Integer.valueOf(JOptionPane.showInputDialog("Cuantos pantalones otros desea ingresar?"));
+        int count = Integer.valueOf(JOptionPane.showInputDialog(
+            "Cuantos pantalones otros desea ingresar?",
+            "01"));
 
         for(int i = 0; i < count; i++){
 
-            String nombre = JOptionPane.showInputDialog(null,"Ingrese el nombre del Pantalon Otros " +  (i+1) + ":", "NOMBRE");
+            if (almacen >= otrosArray.length) {
+                JOptionPane.showMessageDialog(null, 
+                "El almacen de está lleno. No se pueden agregar más productos.", 
+                "Almacen Lleno", JOptionPane.WARNING_MESSAGE);
+                return;
 
-            double precio = Double.valueOf(JOptionPane.showInputDialog(null,"Ingrese el precio del Pantalon Otros " +  (i+1) + ":", "00"));
+            } else {
+                String nombre = JOptionPane.showInputDialog(null,
+                "Ingrese el nombre del Pantalon Otros " +  (almacen + 1) + ":", 
+                "NOMBRE");
 
-            String color = JOptionPane.showInputDialog(null,"Ingrese el color del Pantalon Otros " +  (i+1) + ":", "COLOR");
+                double precio = Double.valueOf(JOptionPane.showInputDialog(null,
+                "Ingrese el precio del Pantalon Otros " +  (almacen + 1) + ":", 
+                "00"));
 
-            String marca = JOptionPane.showInputDialog(null,"Ingrese la marca del Pantalon Otros " +  (i+1) + ":", "MARCA");
+                String color = JOptionPane.showInputDialog(null,
+                "Ingrese el color del Pantalon Otros " +  (almacen + 1) + ":", 
+                "COLOR");
 
-            int talla = Integer.valueOf(JOptionPane.showInputDialog(null,"Ingrese la talla del Pantalon Otros " +  (i+1) + ":", "00"));
+                String marca = JOptionPane.showInputDialog(null,
+                "Ingrese la marca del Pantalon Otros " +  (almacen + 1) + ":", 
+                "MARCA");
 
-            String tela = JOptionPane.showInputDialog(null,"Ingrese el material del Pantalon Otros " +  (i+1) + ":", "MATERIAL");
+                int talla = Integer.valueOf(JOptionPane.showInputDialog(null,
+                "Ingrese la talla del Pantalon Otros " +  (almacen + 1) + ":", 
+                "00"));
 
-            String estilo = JOptionPane.showInputDialog(null,"Ingrese la categoria del Pantalon Otros " +  (i+1) + ":", "ESTILO");
+                String tela = JOptionPane.showInputDialog(null,
+                "Ingrese el material del Pantalon Otros " +  (almacen + 1) + ":", 
+                "MATERIAL");
 
-            Otros nuevoOtros = new Otros(nombre, precio, color, marca, talla, tela, estilo);
+                String estilo = JOptionPane.showInputDialog(null,
+                "Ingrese la categoria del Pantalon Otros " +  (almacen + 1) + ":", 
+                "ESTILO");
 
-            otrosArray.add(nuevoOtros); 
+                Otros nuevoOtros = new Otros(nombre, 
+                precio, color, marca, talla, tela, estilo);
 
-            JOptionPane.showMessageDialog(null, "Se han ingresado correctamente los datos del Pantalon Otros " + (i+1), "Confirmacion de datos", 1);
+                otrosArray[almacen] = nuevoOtros; 
+
+                JOptionPane.showMessageDialog(null, 
+                "Se han ingresado correctamente los datos del Pantalon Otros " + (i+1), 
+                "Confirmacion de datos", 1);
+            }
+
+            almacen ++;
         }
     }
+
+    public static void findPantalonOtros(){
+
+        int codigoFind = Integer.valueOf(JOptionPane.showInputDialog(
+                "Ingrese el código del Producto", 
+                "000"));
+        Otros otrosFind = new Otros(codigoFind);
+
+        for (Otros otros : otrosArray) {
+            if (otros != null && otros.equals(otrosFind)) {
+                JOptionPane.showMessageDialog(null, 
+                "Pantalon encontrado: \n" + otros.toString(), 
+                "Búsqueda Exitosa", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+        }
+
+        JOptionPane.showMessageDialog(null, 
+        "El pantalon Otros con código " + codigoFind + " no ha sido encontrado.", 
+        "Búsqueda Fallida", JOptionPane.WARNING_MESSAGE);
+
+    } 
 
     public static void printPantalonOtros(){
 
@@ -92,10 +146,13 @@ public class OtrosMethod {
         sb.append("Lista de Pantalos Otros:\n");
 
         for (Otros otros : otrosArray) {
-            sb.append(otros.toString()).append("\n");
+            if(otros != null){
+                sb.append(otros.toString()).append("\n");
+            }
         }
 
-        JOptionPane.showMessageDialog(null, sb.toString(), "Pantalos Otros", 1);
+        JOptionPane.showMessageDialog(null, sb.toString(), 
+        "Pantalos Otros", JOptionPane.INFORMATION_MESSAGE);
 
     }
     

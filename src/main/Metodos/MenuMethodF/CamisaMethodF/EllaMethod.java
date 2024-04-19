@@ -1,7 +1,5 @@
 package main.Metodos.MenuMethodF.CamisaMethodF;
 
-import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
 
 import main.Clases.Products.CamisaF.Ella;
@@ -9,43 +7,48 @@ import main.Metodos.MenuMethodF.CamisaMethod;
 
 public class EllaMethod {
     
-    static ArrayList<Ella> ellaArray = new ArrayList<>();
+    static Ella[] ellaArray = new Ella[3];
     
     static int selectCamisa = 0;
+
+    static int almacen = 0;
 
     public static void camisaElla(){
         do{
             //Try catch para evitar que el programa termine si hay un error
             try{
-                selectCamisa = Integer.parseInt(JOptionPane.showInputDialog(null,"""
-                        1. Insertar
-                        2. Borrar
-                        3. Buscar
-                        4. Imprimir
-                        5. Editar
-                        6. Salir
-                        ""","Ingrese un numero"));
+                Object[] options = {"Insertar", "Borrar", "Buscar", "Imprimir", "Editar", "Regresar"};
+
+                selectCamisa = JOptionPane.showOptionDialog(null,
+                        "Seleccione una opción:",
+                        "Zapato Tenis Menu",
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE,
+                        null,
+                        options,
+                        options[0]);
 
                 switch(selectCamisa){
-                    case 1:
+                    case 0:
                     inputCamisaElla();
                     break;
 
+                    case 1:
+                    break;
+
                     case 2:
+                    findCamisaElla();
                     break;
 
                     case 3:
-                    break;
-
-                    case 4:
                     printCamisaElla();
                     break;
                     
-                    case 5:
+                    case 4:
                     
                     break;
 
-                    case 6:
+                    case 5:
                     CamisaMethod.camisa();
                     return;
                         
@@ -54,38 +57,91 @@ public class EllaMethod {
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null,"Ups! Error!");
             }
-        }while(selectCamisa != 6);
+        }while(selectCamisa != 5);
     }
 
     public static void inputCamisaElla(){
 
-        int count = Integer.valueOf(JOptionPane.showInputDialog("Cuantas camisas para ella desea ingresar?"));
+        int count = Integer.valueOf(JOptionPane.showInputDialog(
+            "Cuantas camisas para ella desea ingresar?", 
+            "01"));
 
         for(int i = 0; i < count; i++){
 
-            String nombre = JOptionPane.showInputDialog(null,"Ingrese el nombre de la Camisa para Ella " +  (i+1) + ":", "NOMBRE");
+            if (almacen >= ellaArray.length) {
+                JOptionPane.showMessageDialog(null, 
+                "El almacen está lleno. No se pueden agregar más productos.", 
+                "Almacen Lleno", JOptionPane.WARNING_MESSAGE);
+                return;
 
-            double precio = Double.valueOf(JOptionPane.showInputDialog(null,"Ingrese el precio de la Camisa para Ella " +  (i+1) + ":", "00"));
+            } else {
+                String nombre = JOptionPane.showInputDialog(null,
+                "Ingrese el nombre de la Camisa para Ella " +  (almacen + 1) + ":", 
+                "NOMBRE");
 
-            String color = JOptionPane.showInputDialog(null,"Ingrese el color de la Camisa para Ella " +  (i+1) + ":", "COLOR");
+                double precio = Double.valueOf(JOptionPane.showInputDialog(null,
+                "Ingrese el precio de la Camisa para Ella " +  (almacen + 1) + ":", 
+                "00"));
 
-            String marca = JOptionPane.showInputDialog(null,"Ingrese la marca de la Camisa para Ella " +  (i+1) + ":", "MARCA");
+                String color = JOptionPane.showInputDialog(null,
+                "Ingrese el color de la Camisa para Ella " +  (almacen + 1) + ":", 
+                "COLOR");
 
-            String talla = JOptionPane.showInputDialog(null,"Ingrese la talla de la Camisa para Ella " +  (i+1) + ":", "TALLA");
+                String marca = JOptionPane.showInputDialog(null,
+                "Ingrese la marca de la Camisa para Ella " +  (almacen + 1) + ":", 
+                "MARCA");
 
-            String tela = JOptionPane.showInputDialog(null,"Ingrese el material de la Camisa para Ella " +  (i+1) + ":", "MATERIAL");
+                String talla = JOptionPane.showInputDialog(null,
+                "Ingrese la talla de la Camisa para Ella " +  (almacen + 1) + ":", 
+                "TALLA");
 
-            String estilo = JOptionPane.showInputDialog(null,"Ingrese la categoria de la Camisa para Ella " +  (i+1) + ":", "ESTILO");
+                String tela = JOptionPane.showInputDialog(null,
+                "Ingrese el material de la Camisa para Ella " +  (almacen + 1) + ":", 
+                "MATERIAL");
 
-            Ella nuevoElla = new Ella(nombre, precio, color, marca, talla, tela, estilo);
+                String estilo = JOptionPane.showInputDialog(null,
+                "Ingrese la categoria de la Camisa para Ella " +  (almacen + 1) + ":", 
+                "ESTILO");
 
-            ellaArray.add(nuevoElla);
+                Ella nuevoElla = new Ella(nombre, 
+                precio, color, marca, talla, tela, estilo);
 
-            JOptionPane.showMessageDialog(null, "Se han ingresado correctamente los datos de la Camisa para Ella " + (i+1), "Confirmacion de datos", 1);
+                ellaArray[almacen] = nuevoElla;
+
+                JOptionPane.showMessageDialog(null, 
+                "Camisa Ella " + (almacen + 1) + " :\n" +
+                nuevoElla.toString(), 
+                "Confirmacion de datos", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+            almacen ++;
+ 
         }
 
 
     }
+
+    public static void findCamisaElla(){
+
+        int codigoFind = Integer.valueOf(JOptionPane.showInputDialog(
+                "Ingrese el código del Producto", 
+                "000"));
+        Ella ellaFind = new Ella(codigoFind);
+
+        for (Ella ella : ellaArray) {
+            if (ella != null && ella.equals(ellaFind)) {
+                JOptionPane.showMessageDialog(null, 
+                "Camisa encontrada: \n" + ella.toString(), 
+                "Búsqueda Exitosa", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+        }
+
+        JOptionPane.showMessageDialog(null, 
+        "La camisa para Ella con código " + codigoFind + " no ha sido encontrado.", 
+        "Búsqueda Fallida", JOptionPane.WARNING_MESSAGE);
+
+    } 
 
     public static void printCamisaElla(){
 
@@ -94,10 +150,13 @@ public class EllaMethod {
         sb.append("Lista de Camisas para Ella:\n");
 
         for(Ella ella : ellaArray){
-            sb.append(ella.toString()).append("\n");
+            if(ella != null){
+                sb.append(ella.toString()).append("\n");
+            }
         }
 
-        JOptionPane.showMessageDialog(null, sb.toString(), "Camisas Ella", 1);
+        JOptionPane.showMessageDialog(null, 
+        sb.toString(), "Camisas Ella", 1);
 
     }
 

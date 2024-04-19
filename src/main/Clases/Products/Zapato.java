@@ -12,6 +12,10 @@ public class Zapato extends Producto{
         super(); 
     }
 
+    public Zapato(int codigo){
+        super(codigo);
+    }
+
     public Zapato(String nombre, double precio, String color, String marca, double talla, String material){
         super(nombre, precio,   color, marca);
         this.talla = talla;

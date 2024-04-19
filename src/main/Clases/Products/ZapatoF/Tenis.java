@@ -10,6 +10,10 @@ public class Tenis extends Zapato{
         super();
     }
 
+    public Tenis (int codigo){
+        super(codigo);
+    }
+
     public Tenis(String nombre, double precio,  String color, String marca, double talla, String material, String deporte){
         super(nombre, precio, color, marca, talla, material);
         this.deporte = deporte;
@@ -31,5 +35,25 @@ public class Tenis extends Zapato{
         return 
         super.toString() + 
         "\nDeporte :" + this.deporte;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        // Verificar si el objeto a comparar es el mismo objeto
+        if (this == obj) {
+            return true;
+        }
+
+        // Verificar si el objeto a comparar es nulo o no es una instancia de Casual
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+
+        // Convertir el objeto a comparar a tipo Casual
+        Tenis tenis = (Tenis) obj;
+
+        // Comparar los códigos de los zapatos Casuales
+        return getCodigo() == tenis.getCodigo();
+
     }
 }

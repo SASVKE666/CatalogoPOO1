@@ -1,7 +1,5 @@
 package main.Metodos.MenuMethodF.ZapatoMethodF;
 
-import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
 
 import main.Clases.Products.ZapatoF.Tenis;
@@ -11,7 +9,9 @@ public class TenisMethod {
 
     static int selectZapato = 0;
 
-    static ArrayList<Tenis> tenisArray = new ArrayList<>();
+    static int almacen = 0;
+
+    static Tenis[] tenisArray = new Tenis[3];
 
     public static void zapatoTenis(){
         do{
@@ -38,6 +38,7 @@ public class TenisMethod {
                     break;
 
                     case 2:
+                    findZapatoTenis();
                     break;
 
                     case 3:
@@ -61,32 +62,85 @@ public class TenisMethod {
 
     public static void inputZapatoTenis(){
 
-        int count = Integer.valueOf(JOptionPane.showInputDialog("Cuantos zapatos tenis desea ingresar?"));
+        int count = Integer.valueOf(JOptionPane.showInputDialog(
+            "¿Cuántos zapatos Tenis desea ingresar?", 
+            "01"));
 
-        for(int i = 0; i < count; i++){
+        for (int i = 0; i < count; i++) {
+            
+            if (almacen >= tenisArray.length) {
+                JOptionPane.showMessageDialog(null, 
+                "El almacen de está lleno. No se pueden agregar más productos.", 
+                "Almacen Lleno", JOptionPane.WARNING_MESSAGE);
+                return;
 
-            String nombre = JOptionPane.showInputDialog(null,"Ingrese el nombre del Zapato Tenis " +  (i+1) + ":", "NOMBRE");
+            } else { 
 
-            double precio = Double.valueOf(JOptionPane.showInputDialog(null,"Ingrese el precio del Zapato Tenis " +  (i+1) + ":", "00"));
+                String nombre = JOptionPane.showInputDialog(null, 
+                "Ingrese el nombre del Zapato Tenis " + (almacen + 1) + ":", 
+                "NOMBRE");
 
-            String color = JOptionPane.showInputDialog(null,"Ingrese el color del Zapato Tenis " +  (i+1) + ":", "COLOR");
+                double precio = Double.valueOf(JOptionPane.showInputDialog(null, 
+                "Ingrese el precio del Zapato Tenis " + (almacen + 1) + ":", 
+                "00"));
 
-            String marca = JOptionPane.showInputDialog(null,"Ingrese la marca del Zapato Tenis " +  (i+1) + ":", "MARCA");
+                String color = JOptionPane.showInputDialog(null, 
+                "Ingrese el color del Zapato Tenis " + (almacen + 1) + ":", 
+                "COLOR");
 
-            double talla = Double.valueOf(JOptionPane.showInputDialog(null,"Ingrese la talla del Zapato Tenis " +  (i+1) + ":", "00"));
+                String marca = JOptionPane.showInputDialog(null, 
+                "Ingrese la marca del Zapato Tenis " + (almacen + 1) + ":", 
+                "MARCA");
 
-            String material = JOptionPane.showInputDialog(null,"Ingrese el material del Zapato Tenis " +  (i+1) + ":", "MATERIAL");
+                double talla = Double.valueOf(JOptionPane.showInputDialog(null, 
+                "Ingrese la talla del Zapato Tenis " + (almacen + 1) + ":", 
+                "00"));
 
-            String deporte = JOptionPane.showInputDialog(null,"Ingrese el deporte del Zapato Tenis " +  (i+1) + ":", "DEPORTE");
+                String material = JOptionPane.showInputDialog(null, 
+                "Ingrese el material del Zapato Tenis " + (almacen + 1) + ":", 
+                "MATERIAL");
 
-            Tenis nuevoTenis = new Tenis(nombre, precio, color, marca, talla, material, deporte);
+                String deporte = JOptionPane.showInputDialog(null, 
+                "Ingrese el deporte del Zapato Tenis " + (almacen + 1) + ":", 
+                "DEPORTE");
 
-            tenisArray.add(nuevoTenis); 
+                Tenis nuevoTenis = new Tenis(nombre, 
+                precio, color, marca, talla, material, deporte);
 
-            JOptionPane.showMessageDialog(null, "Se han ingresado correctamente los datos del Zapato Tenis " + (i+1), "Confirmacion de datos", 1);
+                tenisArray[almacen] = nuevoTenis;
+
+                JOptionPane.showMessageDialog(null, 
+                "Zapato Tenis " + (almacen + 1) + " :\n" + 
+                nuevoTenis.toString(),
+                "Confirmación de datos", JOptionPane.INFORMATION_MESSAGE);
+            } 
+
+            almacen++;
         }
 
     }
+
+    public static void findZapatoTenis(){
+
+        int codigoFind = Integer.valueOf(JOptionPane.showInputDialog(
+                "Ingrese el código del Producto", 
+                "000"));
+        Tenis tenisFind = new Tenis(codigoFind);
+
+        for (Tenis tenis : tenisArray) {
+            if (tenis != null && tenis.equals(tenisFind)) {
+                JOptionPane.showMessageDialog(null, 
+                "Zapato encontrado: \n" + tenis.toString(), 
+                "Búsqueda Exitosa", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+        }
+
+        JOptionPane.showMessageDialog(null, 
+        "El zapato Tenis con código " + codigoFind + " no ha sido encontrado.", 
+        "Búsqueda Fallida", JOptionPane.WARNING_MESSAGE);
+
+    } 
 
     public static void printZapatoTenis(){
 
@@ -95,10 +149,13 @@ public class TenisMethod {
         sb.append("Lista de Zapatos Tenis:\n");
 
         for (Tenis tenis : tenisArray) {
-            sb.append(tenis.toString()).append("\n");
+            if(tenis != null){
+                sb.append(tenis.toString()).append("\n");
+            }
         }
 
-        JOptionPane.showMessageDialog(null, sb.toString(), "Zapatos Tenis", 1);
+        JOptionPane.showMessageDialog(null, 
+        sb.toString(), "Zapatos Tenis", JOptionPane.INFORMATION_MESSAGE);
 
     }
 

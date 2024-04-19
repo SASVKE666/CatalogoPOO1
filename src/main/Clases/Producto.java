@@ -10,12 +10,19 @@ public class Producto {
     private static int serie = 100;
 
     //  contructores
-    public  Producto(){
-        this.codigo = ++Producto.serie; 
+    public Producto(){
+        this.codigo = ++Producto.serie;  
     }
 
+    public Producto(int codigo){
+
+        this.codigo = codigo;
+
+    }
+
+
     public Producto(String nombre, double precio, String color, String marca){
-        this.codigo = ++Producto.serie;
+        this.codigo = ++Producto.serie; 
         this.nombre = nombre;
         this.marca = marca;
         this.precio = precio;
@@ -67,7 +74,7 @@ public class Producto {
         /* "Serie: " + serie + */
         "\nNombre: " + this.nombre +
         "\nPrecio: " + this.color + 
-        "\nCodigo: " + this.codigo + 
+        "\nCodigo: " + this.getCodigo() + 
         "\nColor: " + this.color +
         "\nMarca: " +this.marca;
     }
@@ -90,7 +97,7 @@ public class Producto {
         //  aux obj to compare
         Producto aux = (Producto) obj;
         //  if the object "codigo" are the same, return true
-        return this.codigo == aux.codigo;
+        return this.getCodigo() == aux.getCodigo();
   
     }
 

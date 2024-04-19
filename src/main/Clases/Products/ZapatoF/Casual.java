@@ -10,6 +10,10 @@ public class Casual extends Zapato{
         super();
     }
 
+    public Casual(int codigo){
+        super(codigo); 
+    }
+
     public Casual(String nombre, double precio, String color, String marca, double talla, String material, String categoria){
         super(nombre, precio, color, marca, talla, material);
         this.categoria = categoria;
@@ -41,7 +45,7 @@ public class Casual extends Zapato{
         }
 
         // Verificar si el objeto a comparar es nulo o no es una instancia de Casual
-        if (obj == null || getClass() != obj.getClass()) {
+        if (obj == null || this.getClass() != obj.getClass()) {
             return false;
         }
 
