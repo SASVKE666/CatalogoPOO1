@@ -14,27 +14,38 @@ public class MenuMethod {
             //Try catch para evitar que el programa termine si hay un error
             do{
                 try{
-                    selectMenu = Integer.parseInt(JOptionPane.showInputDialog(null,"""
+
+                    Object[] options = {"Zapato", "Camisa", "Pantalon", "Salir"};
+
+                    selectMenu = JOptionPane.showOptionDialog(null,
+                        "Seleccione una opción:",
+                        "Menú",
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE,
+                        null,
+                        options,
+                        options[0]);
+                    /* selectMenu = Integer.parseInt(JOptionPane.showInputDialog(null,"""
                             1. Zapato
                             2. Camisa
                             3. Pantalon
                             4. Salir
-                            ""","Ingrese un numero"));
+                            ""","Ingrese un numero")); */
                                             
                     switch(selectMenu){
-                        case 1:
+                        case 0:
                         ZapatoMethod.zapato();
                         break;
     
-                        case 2:
+                        case 1:
                         CamisaMethod.camisa();
                         break;
     
-                        case 3:
+                        case 2:
                         PantalonMethod.pantalon();
                         break;
                         
-                        case 4:
+                        case 3:
                         //JOptionPane.showMessageDialog(null, "Bye Bye", "Adios", 2);
                         return;
                         
