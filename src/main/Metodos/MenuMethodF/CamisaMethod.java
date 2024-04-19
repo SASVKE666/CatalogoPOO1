@@ -3,7 +3,8 @@ package main.Metodos.MenuMethodF;
 import javax.swing.JOptionPane;
 
 import main.Metodos.MenuMethod;
-import main.Metodos.MenuMethodF.CamisaMethodF.*;
+import main.Metodos.MenuMethodF.CamisaMethodF.ElMethod;
+import main.Metodos.MenuMethodF.CamisaMethodF.EllaMethod;
 
 public class CamisaMethod {
 
@@ -14,22 +15,27 @@ public class CamisaMethod {
         do{
             //Try catch para evitar que el programa termine si hay un error
             try{
-                selectCamisa = Integer.parseInt(JOptionPane.showInputDialog(null,"""
-                        1. El
-                        2. Ella
-                        3. Regresar
-                        ""","Ingrese un numero"));
+                Object[] options = {"El", "Ella", "Regresar"};
+
+                selectCamisa = JOptionPane.showOptionDialog(null,
+                "Seleccione una opción:",
+                "Menú",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                options,
+                options[0]);   
 
                 switch(selectCamisa){
-                    case 1:
+                    case 0:
                     ElMethod.camisaEl();
                     break;
 
-                    case 2:
+                    case 1:
                     EllaMethod.camisaElla();
                     break;
 
-                    case 3:
+                    case 2:
                     MenuMethod.menu();
                     return;
                         
@@ -38,7 +44,7 @@ public class CamisaMethod {
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null,"Ups! Error!");
             }
-        }while(selectCamisa != 3);
+        }while(selectCamisa != 2);
     }
 
 }

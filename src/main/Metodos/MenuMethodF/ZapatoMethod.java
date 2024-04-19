@@ -15,22 +15,28 @@ public class ZapatoMethod{
         do{
             //Try catch para evitar que el programa termine si hay un error
             try{
-                selectZapato = Integer.parseInt(JOptionPane.showInputDialog(null,"""
-                        1. Casual
-                        2. Tenis
-                        3. Regresar
-                        ""","Ingrese un numero"));
+
+                Object[] options = {"Casual", "Tenis", "Regresar"};
+
+                selectZapato = JOptionPane.showOptionDialog(null,
+                "Seleccione una opción:",
+                "Zapato Menu",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                options,
+                options[0]);   
 
                 switch(selectZapato){
-                    case 1:
+                    case 0:
                     CasualMethod.zapatoCasual();
                     break;
                         
-                    case 2:
+                    case 1:
                     TenisMethod.zapatoTenis();
                     break;
 
-                    case 6:
+                    case 2:
                     MenuMethod.menu();
                     return;
                 }
@@ -38,15 +44,7 @@ public class ZapatoMethod{
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null,"Ups! Error!");
             }
-        }while(selectZapato != 3);
-    }
-
-    public static int getSelectZapato() {
-        return selectZapato;
-    }
-
-    public static void setSelectZapato(int select) {
-        ZapatoMethod.selectZapato = select;
+        }while(selectZapato != 2);
     }
 
 }

@@ -32,4 +32,24 @@ public class Casual extends Zapato{
         super.toString() + 
         "\nCategoria: " + this.categoria;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        // Verificar si el objeto a comparar es el mismo objeto
+        if (this == obj) {
+            return true;
+        }
+
+        // Verificar si el objeto a comparar es nulo o no es una instancia de Casual
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        // Convertir el objeto a comparar a tipo Casual
+        Casual casual = (Casual) obj;
+
+        // Comparar los códigos de los zapatos Casuales
+        return getCodigo() == casual.getCodigo();
+
+    }
 }

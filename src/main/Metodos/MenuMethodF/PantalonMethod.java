@@ -14,32 +14,37 @@ public class PantalonMethod {
         do{
             //Try catch para evitar que el programa termine si hay un error
             try{
-                selectPantalon = Integer.parseInt(JOptionPane.showInputDialog(null,"""
-                        1. Jeans
-                        2. Otros
-                        3. Regresar
-                        ""","Ingrese un numero"));
+                Object[] options = {"Jeans", "Otros", "Regresar"};
+
+                selectPantalon = JOptionPane.showOptionDialog(null,
+                "Seleccione una opción:",
+                "Pantalon Menú",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                options,
+                options[0]);
+
+                switch(selectPantalon){
+                    case 0:
+                    JeansMethod.pantalonJeans();
+                    break;
+    
+                    case 1:
+                    OtrosMethod.pantalonOtros();
+                    break;
+    
+                    case 2:
+                    MenuMethod.menu();
+                    return;
+
+                }
 
             }catch(Exception e){
-                selectPantalon = 0;
                 JOptionPane.showMessageDialog(null,"Ups! Error!");
             }
-            
-            switch(selectPantalon){
-                case 1:
-                JeansMethod.pantalonJeans();
-                break;
-
-                case 2:
-                OtrosMethod.pantalonOtros();
-                break;
-
-                case 3:
-                MenuMethod.menu();
-                return;
-                    
-            }
-        }while(selectPantalon != 3);
+        
+        }while(selectPantalon != 2);
     }
 
 }

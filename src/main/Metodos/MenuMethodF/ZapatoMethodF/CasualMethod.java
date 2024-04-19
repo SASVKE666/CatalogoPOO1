@@ -1,7 +1,5 @@
 package main.Metodos.MenuMethodF.ZapatoMethodF;
 
-import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
 
 import main.Clases.Products.ZapatoF.Casual;
@@ -11,40 +9,45 @@ public class CasualMethod {
 
     static int selectZapato = 0;
 
-    static ArrayList<Casual> casualArray = new ArrayList<>();
+    static Casual[] casualArray = new Casual[10];
+
+    //static ArrayList<Casual> casualArray = new ArrayList<>();
 
     public static void zapatoCasual(){
         do{
                 //Try catch para evitar que el programa termine si hay un error
             try{
-                selectZapato = Integer.parseInt(JOptionPane.showInputDialog(null,"""
-                        1. Insertar
-                        2. Borrar
-                        3. Buscar
-                        4. Imprimir
-                        5. Editar
-                        6. Salir
-                        ""","Ingrese un numero"));
+                Object[] options = {"Insertar", "Borrar", "Buscar", "Imprimir", "Editar", "Regresar"};
+
+                selectZapato = JOptionPane.showOptionDialog(null,
+                        "Seleccione una opción:",
+                        "Zapato Tenis Menu",
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE,
+                        null,
+                        options,
+                        options[0]);
 
                 switch(selectZapato){
-                    case 1:
+                    case 0:
                     inputZapatoCasual();
                     break;
 
+                    case 1:
+                    break;
+
                     case 2:
+                    findZapatoCasual();
                     break;
 
                     case 3:
-                    break;
-
-                    case 4:
                     printZapatoCasual();
                     break;
                     
-                    case 5:
+                    case 4:
                     break;
 
-                    case 6:
+                    case 5:
                     ZapatoMethod.zapato();
                     return;
                         
@@ -54,12 +57,12 @@ public class CasualMethod {
                 JOptionPane.showMessageDialog(null,"Ups! Error!");
             }
 
-        }while(selectZapato != 6);
+        }while(selectZapato != 5);
     }
 
     public static void inputZapatoCasual(){ 
 
-        int count = Integer.valueOf(JOptionPane.showInputDialog("Cuantos zapatos casual desea ingresar?"));
+        int count = Integer.valueOf(JOptionPane.showInputDialog("Cuantos zapatos casual desea ingresar?", "01"));
 
         for(int i = 0; i < count; i++){
 
@@ -79,7 +82,7 @@ public class CasualMethod {
 
             Casual nuevoCasual = new Casual(nombre, precio, color, marca, talla, material, categoria);
 
-            casualArray.add(nuevoCasual); 
+            casualArray[i] = nuevoCasual; 
 
             JOptionPane.showMessageDialog(null, "Se han ingresado correctamente los datos del Zapato Casual " + (i+1), "Confirmacion de datos", 1);
         }
@@ -100,5 +103,25 @@ public class CasualMethod {
         JOptionPane.showMessageDialog(null, sb.toString(), "Zapatos Casuales", 1);
 
     }
+
+    public static void findZapatoCasual(){
+
+        int codigoFint = Integer.valueOf(JOptionPane.showInputDialog("Ingrese el codigo del Producto", "000"));
+
+        boolean fint = false;
+
+         for (Casual casual : casualArray) {
+            if(casual != null && casual.getCodigo() == codigoFint){
+                JOptionPane.showMessageDialog(null, "Zapato encontrado: \n" + casual.toString(), "Búsqueda Exitosa", 1);
+                fint = true;
+                break;
+            }
+        }
+
+        if(!fint){
+            JOptionPane.showMessageDialog(null, "El zapato con código " + codigoFint + " no ha sido encontrado.", "Búsqueda Fallida", 2);
+        }
+
+    } 
     
 }

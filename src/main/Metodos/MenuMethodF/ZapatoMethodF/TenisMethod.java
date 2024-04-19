@@ -17,34 +17,37 @@ public class TenisMethod {
         do{
                 //Try catch para evitar que el programa termine si hay un error
             try{
-                selectZapato = Integer.parseInt(JOptionPane.showInputDialog(null,"""
-                        1. Insertar
-                        2. Borrar
-                        3. Buscar
-                        4. Imprimir
-                        5. Editar
-                        6. Salir
-                        ""","Ingrese un numero"));
+
+                Object[] options = {"Insertar", "Borrar", "Buscar", "Imprimir", "Editar", "Regresar"};
+
+                selectZapato = JOptionPane.showOptionDialog(null,
+                        "Seleccione una opción:",
+                        "Zapato Tenis Menu",
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE,
+                        null,
+                        options,
+                        options[0]);
 
                 switch(selectZapato){
-                    case 1:
+                    case 0:
                     inputZapatoTenis();
+                    break;
+
+                    case 1:
                     break;
 
                     case 2:
                     break;
 
                     case 3:
-                    break;
-
-                    case 4:
                     printZapatoTenis();
                     break;
                     
-                    case 5:
+                    case 4:
                     break;
 
-                    case 6:
+                    case 5:
                     ZapatoMethod.zapato();
                     return;
                         
@@ -53,7 +56,7 @@ public class TenisMethod {
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null,"Ups! Error!");
             }
-        }while(selectZapato != 6);
+        }while(selectZapato != 5);
     }
 
     public static void inputZapatoTenis(){
