@@ -35,6 +35,7 @@ public class JeansMethod {
                     break;
 
                     case 1:
+                    erasePantalonJeans();
                     break;
 
                     case 2:
@@ -46,7 +47,7 @@ public class JeansMethod {
                     break;
                     
                     case 4:
-                    
+                    editPantalonJeans();
                     break;
 
                     case 5:
@@ -65,7 +66,9 @@ public class JeansMethod {
 
         int count = Integer.valueOf(JOptionPane.showInputDialog(
             "Cuantos pantalones jeans desea ingresar?",
-            "01"));
+            "01"
+        ));
+    
 
         for(int i = 0; i < count; i++){
 
@@ -119,6 +122,59 @@ public class JeansMethod {
         }
     }
 
+    public static void erasePantalonJeans(){
+
+        int codeToErase = Integer.valueOf(
+            JOptionPane.showInputDialog(
+                "Ingrese el codigo del Pantalon Jeans a eliminar"
+            )
+        );
+
+        Jeans jeansErase = new Jeans(codeToErase);
+
+        for( int i = 0; i < jeansArray.length; i++){
+
+            if( jeansArray[i] != null && jeansArray[i].equals(jeansErase)) {
+
+                int confirmacion = JOptionPane.showConfirmDialog(
+                    null, 
+                    "¿Estás seguro de que deseas eliminar el siguiente Pantalón Otros?\n" + 
+                    jeansArray[i].toString(), 
+                    "Confirmar Eliminación", 
+                    JOptionPane.YES_NO_OPTION
+                );
+
+                JOptionPane.showMessageDialog(
+                null, 
+                "Pantalon Jeans eliminado: \n " +
+                jeansArray[i].toString(), 
+                "Eliminacion Existosa", 
+                JOptionPane.INFORMATION_MESSAGE);
+
+                if(confirmacion == JOptionPane.NO_OPTION) {
+                    return;
+                }
+
+                for(int j = i; j < jeansArray.length -1; j++){
+                    jeansArray[j] = jeansArray[j + 1];
+                }
+
+                jeansArray[jeansArray.length - 1] = null;
+
+                almacen--;
+                return;
+            }
+        }
+
+        JOptionPane.showMessageDialog(
+            null, 
+            "Pantalón Jeans " + codeToErase + " no ha sido encontrado.", 
+            "Búsqueda Fallida", 
+            JOptionPane.WARNING_MESSAGE
+        );
+
+    }
+
     public static void findPantalonJeans(){
 
         int codigoFind = Integer.valueOf(JOptionPane.showInputDialog(
@@ -155,6 +211,86 @@ public class JeansMethod {
 
         JOptionPane.showMessageDialog(null, sb.toString(), 
         "Pantalones Jeans", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public static void editPantalonJeans(){
+
+        Integer codeToEdit = Integer.valueOf(
+            JOptionPane.showInputDialog(
+                "Ingrese el codigo del Pantalon Jeans que va a cambiar"
+            )
+        );
+
+        Jeans jeansFind = new Jeans(codeToEdit);
+
+        for(int i = 0; i < jeansArray.length; i++ ){
+            if(jeansArray[i] != null && jeansArray[i].equals(jeansFind)) {
+
+                int confirmacion = JOptionPane.showConfirmDialog(
+                    null, 
+                    "¿Estás seguro de que deseas editar el siguiente Pantalón Jeans?\n" + 
+                    jeansArray[i].toString(), 
+                    "Confirmar Edición", 
+                    JOptionPane.YES_NO_OPTION
+                );
+
+                if(confirmacion == JOptionPane.YES_OPTION){
+                    String nombre = JOptionPane.showInputDialog(null,
+                "Ingrese el nombre del Pantalon Jeans " +  (i + 1) + ":", 
+                "NOMBRE");
+
+                double precio = Double.valueOf(JOptionPane.showInputDialog(null,
+                "Ingrese el precio del Pantalon Jeans " +  (i + 1) + ":", 
+                "00"));
+
+                String color = JOptionPane.showInputDialog(null,
+                "Ingrese el color del Pantalon Jeans " +  (i + 1) + ":", 
+                "COLOR");
+
+                String marca = JOptionPane.showInputDialog(null,
+                "Ingrese la marca del Pantalon Jeans " +  (i + 1) + ":", 
+                "MARCA");
+
+                int talla = Integer.valueOf(JOptionPane.showInputDialog(null,
+                "Ingrese la talla del Pantalon Jeans " +  (i + 1) + ":", 
+                "00"));
+
+                String tela = JOptionPane.showInputDialog(null,
+                "Ingrese el material del Pantalon Jeans " +  (i + 1) + ":", 
+                "MATERIAL");
+
+                String corte = JOptionPane.showInputDialog(null,
+                "Ingrese la categoria del Pantalon Jeans " +  (i + 1) + ":", 
+                "CORTE");
+
+                Jeans nuevoJeans = new Jeans(nombre, 
+                precio, color, marca, talla, tela, corte);
+
+                jeansArray[i] = nuevoJeans;
+
+                JOptionPane.showMessageDialog(
+                    null, 
+                    "Pantalon Jeans actualizado: \n" +
+                    nuevoJeans.toString(),
+                    "Actualizacion exitosa", 
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+
+                printPantalonJeans();
+                return;
+                }
+
+            }
+        }
+
+        JOptionPane.showMessageDialog(
+            null, 
+            "Pantalon Jeans " + 
+            codeToEdit + " no ha sido encontrado.", 
+            "Busqueda Fallida", 
+            JOptionPane.WARNING_MESSAGE
+        );
+
     }
 
 

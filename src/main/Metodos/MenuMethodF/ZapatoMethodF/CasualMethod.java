@@ -34,6 +34,7 @@ public class CasualMethod {
                     break;
 
                     case 1:
+                    eraseZapatoCasual();
                     break;
 
                     case 2:
@@ -45,6 +46,7 @@ public class CasualMethod {
                     break;
                     
                     case 4:
+                    editZapatoCasual();
                     break;
 
                     case 5:
@@ -54,7 +56,9 @@ public class CasualMethod {
                 }
 
             }catch(Exception e){
-                JOptionPane.showMessageDialog(null,"Ups! Error!");
+                JOptionPane.showMessageDialog(null,
+                "Ups! Error!",
+                "CASUAL", JOptionPane.WARNING_MESSAGE);
             }
 
         }while(selectZapato != 5);
@@ -76,6 +80,8 @@ public class CasualMethod {
         
         } */
 
+        
+
         for (int i = 0; i < count; i++) {
             
             if (almacen >= casualArray.length) {
@@ -87,8 +93,8 @@ public class CasualMethod {
             } else { 
 
                 String nombre = JOptionPane.showInputDialog(null, 
-                "Ingrese el nombre del Zapato Casual " + (almacen + 1) + ":", 
-                "NOMBRE");
+                "Ingrese el nombre del Zapato Casual " + (almacen + 1) + ":",
+                "nombre");
 
                 double precio = Double.valueOf(JOptionPane.showInputDialog(null, 
                 "Ingrese el precio del Zapato Casual " + (almacen + 1) + ":", 
@@ -167,6 +173,61 @@ public class CasualMethod {
         
     }
 
+    public static void eraseZapatoCasual(){
+
+        int codeToErase = Integer.valueOf(
+            JOptionPane.showInputDialog(
+            "Ingrese el codigo del Zapato Casual a eliminar"));
+
+        Casual zapatoErase = new Casual(codeToErase);
+
+        for (int i = 0; i < casualArray.length; i++) {
+
+            if (casualArray[i]!= null && casualArray[i].equals(zapatoErase)) {
+
+                int confirmacion = JOptionPane.showConfirmDialog(
+                    null, 
+                    "¿Estás seguro de que deseas eliminar el siguiente Zapato Casual?\n" + 
+                    casualArray[i].toString(), 
+                    "Confirmar Eliminación", 
+                    JOptionPane.YES_NO_OPTION
+                );
+
+                JOptionPane.showMessageDialog(
+                    null, 
+                    "Zapato Casual eliminado: \n " +
+                    casualArray[i].toString(), 
+                    "Eliminacion Existosa", 
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+
+                if(confirmacion == JOptionPane.NO_OPTION) {
+                    return;
+                }
+
+                for (int j = i; j < casualArray.length - 1; j++) {
+                    casualArray[j] = casualArray[j + 1];
+                }
+                casualArray[casualArray.length - 1] = null;
+
+                almacen--;
+                printZapatoCasual();
+                return;
+
+                
+            }
+        }
+    
+
+        JOptionPane.showMessageDialog(
+            null, 
+            "Zapato Casual " + codeToErase + " no ha sido encontrado.", 
+            "Búsqueda Fallida", 
+            JOptionPane.WARNING_MESSAGE
+        );
+
+    }
+
     public static void findZapatoCasual(){
 
         /* int codigoFint = Integer.valueOf(JOptionPane.showInputDialog(
@@ -227,6 +288,86 @@ public class CasualMethod {
         JOptionPane.showMessageDialog(null, 
         sb.toString(),
         "Zapatos Casuales", JOptionPane.INFORMATION_MESSAGE); 
+
+    }
+
+    public static void editZapatoCasual(){
+
+        Integer codeToEdit = Integer.valueOf(
+            JOptionPane.showInputDialog(
+            "Ingrese el codigo del Zapato Casual que va a cambiar"
+            )
+        );
+
+        Casual zapatoFind = new Casual(codeToEdit);
+    
+        for (int i = 0; i < casualArray.length; i++) {
+            if (casualArray[i]!= null && casualArray[i].equals(zapatoFind)) {
+
+                int confirmacion = JOptionPane.showConfirmDialog(
+                    null, 
+                    "¿Estás seguro de que deseas editar el siguiente Zapato Casual?\n" + 
+                    casualArray[i].toString(), 
+                    "Confirmar Edición", 
+                    JOptionPane.YES_NO_OPTION
+                );
+
+                if(confirmacion == JOptionPane.YES_OPTION){
+
+                    String nombre = JOptionPane.showInputDialog(null, 
+                    "Ingrese el nombre del Zapato Casual " + (i + 1) + ":",
+                    "nombre");
+
+                    double precio = Double.valueOf(JOptionPane.showInputDialog(null, 
+                    "Ingrese el precio del Zapato Casual " + (i + 1) + ":", 
+                    "00"));
+
+                    String color = JOptionPane.showInputDialog(null, 
+                    "Ingrese el color del Zapato Casual " + (i + 1) + ":", 
+                    "COLOR");
+
+                    String marca = JOptionPane.showInputDialog(null, 
+                    "Ingrese la marca del Zapato Casual " + (i + 1) + ":", 
+                    "MARCA");
+
+                    double talla = Double.valueOf(JOptionPane.showInputDialog(null, 
+                    "Ingrese la talla del Zapato Casual " + (i + 1) + ":", 
+                    "00"));
+
+                    String material = JOptionPane.showInputDialog(null, 
+                    "Ingrese el material del Zapato Casual " + (i + 1) + ":", 
+                    "MATERIAL");
+
+                    String categoria = JOptionPane.showInputDialog(null, 
+                    "Ingrese la categoría del Zapato Casual " + (i + 1) + ":", 
+                    "CATEGORÍA");
+        
+                    Casual newCasual = new Casual(nombre, 
+                    precio, color, marca, talla, material, categoria);
+
+                    casualArray[i] = newCasual;
+        
+                    JOptionPane.showMessageDialog(null, 
+                        "Zapato Casual actualizado: \n" + 
+                        newCasual.toString(), 
+                        "Actualizacion Exitosa", 
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+
+                    printZapatoCasual();
+
+                    return;
+                }
+
+            }
+        }
+    
+        JOptionPane.showMessageDialog(null, 
+            "El Zapato Casual " + 
+            codeToEdit + " no ha sido encontrada.", 
+            "Búsqueda Fallida", 
+            JOptionPane.WARNING_MESSAGE
+        );
 
     }
     

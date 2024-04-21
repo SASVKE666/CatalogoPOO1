@@ -52,7 +52,9 @@ public class MenuMethod {
                     }
     
                 }catch(Exception e){
-                    JOptionPane.showMessageDialog(null,"Ups! Error!","ERROR",0);
+                    JOptionPane.showMessageDialog(null,
+                    "Ups! Error!",
+                    "ERROR MENU",JOptionPane.WARNING_MESSAGE);
                 }
             }while(selectMenu != 3);
     }

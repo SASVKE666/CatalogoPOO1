@@ -35,6 +35,7 @@ public class ElMethod {
                     break;
 
                     case 1:
+                    eraseCamisaEl();
                     break;
 
                     case 2:
@@ -46,7 +47,7 @@ public class ElMethod {
                     break;
                     
                     case 4:
-                    
+                    editCamisaEl();
                     break;
 
                     case 5:
@@ -116,8 +117,62 @@ public class ElMethod {
             }
 
             almacen ++;
-            
         }
+    }
+
+    public static void eraseCamisaEl(){
+
+        int codeToErase = Integer.valueOf(
+            JOptionPane.showInputDialog(
+                "Ingrese el codigo de la Camisa El a eliminar"
+            )
+        );
+
+        El elErase = new El(codeToErase);
+
+        for( int i = 0; i < elArray.length; i++){
+
+            if( elArray[i] != null && elArray[i].equals(elErase)) {
+
+                int confirmacion = JOptionPane.showConfirmDialog(
+                    null, 
+                    "¿Estás seguro de que deseas eliminar la siguiente Camisa El?\n" + 
+                    elArray[i].toString(), 
+                    "Confirmar Eliminación", 
+                    JOptionPane.YES_NO_OPTION
+                );
+
+                JOptionPane.showMessageDialog(
+                    null, 
+                    "Camisa El eliminado: \n " +
+                    elArray[i].toString(), 
+                    "Eliminacion Existosa", 
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+
+                
+                if(confirmacion == JOptionPane.NO_OPTION) {
+                    return;
+                }
+
+                for(int j = i; j < elArray.length -1; j++){
+                    elArray[j] = elArray[j + 1];
+                }
+
+                elArray[elArray.length - 1] = null;
+
+                almacen--;
+                printCamisaEl();
+                return;
+            }
+        }
+
+        JOptionPane.showMessageDialog(
+            null, 
+            "Camisa El " + codeToErase + " no ha sido encontrado.", 
+            "Búsqueda Fallida", 
+            JOptionPane.WARNING_MESSAGE
+        );
 
     }
 
@@ -157,5 +212,84 @@ public class ElMethod {
 
         JOptionPane.showMessageDialog(null, sb.toString(), 
         "Camisas El", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public static void editCamisaEl(){
+
+        Integer codeToEdit = Integer.valueOf(
+            JOptionPane.showInputDialog(
+                "Ingrese el codigo de la Camisa El que va a cambiar"
+            )
+        );
+
+        El ellaFind = new El(codeToEdit);
+
+        for(int i = 0; i < elArray.length; i++ ){
+            if(elArray[i] != null && elArray[i].equals(ellaFind)) {
+
+                int confirmacion = JOptionPane.showConfirmDialog(
+                    null, 
+                    "¿Estás seguro de que deseas editar la siguiente Camisa El?\n" + 
+                    elArray[i].toString(), 
+                    "Confirmar Edición", 
+                    JOptionPane.YES_NO_OPTION
+                );
+
+                if(confirmacion == JOptionPane.YES_OPTION){
+                    String nombre = JOptionPane.showInputDialog(null,
+                    "Ingrese el nombre de la Camisa para El " +  (almacen + 1) + ":", 
+                    "NOMBRE");
+
+                    double precio = Double.valueOf(JOptionPane.showInputDialog(null,
+                    "Ingrese el precio de la Camisa para El " +  (almacen + 1) + ":", 
+                    "00"));
+
+                    String color = JOptionPane.showInputDialog(null,
+                    "Ingrese el color de la Camisa para El " +  (almacen + 1) + ":", 
+                    "COLOR");
+
+                    String marca = JOptionPane.showInputDialog(null,
+                    "Ingrese la marca de la Camisa para El " +  (almacen + 1) + ":", 
+                    "MARCA");
+
+                    String talla = JOptionPane.showInputDialog(null,
+                    "Ingrese la talla de la Camisa para El " +  (almacen + 1) + ":", 
+                    "TALLA");
+
+                    String tela = JOptionPane.showInputDialog(null,
+                    "Ingrese el material de la Camisa para El " +  (almacen + 1) + ":", 
+                    "MATERIAL");
+
+                    String tipo = JOptionPane.showInputDialog(null,
+                    "Ingrese la categoria de la Camisa para El " +  (almacen + 1) + ":", 
+                    "CORTE");
+
+                    El nuevoEl = new El(nombre, 
+                    precio, color, marca, talla, tela, tipo);
+
+                    elArray[i] = nuevoEl;
+
+                    JOptionPane.showMessageDialog(
+                        null, 
+                        "Camisa El actualizada: \n" +
+                        nuevoEl.toString(),
+                        "Actualizacion exitosa", 
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+
+                    printCamisaEl();
+                    return;
+                }
+
+            }
+        }
+
+        JOptionPane.showMessageDialog(
+        null, 
+        "Camisa El " + 
+        codeToEdit + " no ha sido encontrado.", 
+        "Busqueda Fallida", 
+        JOptionPane.WARNING_MESSAGE);
+
     }
 }
