@@ -141,6 +141,15 @@ public class ElMethod {
                     "Confirmar Eliminación", 
                     JOptionPane.YES_NO_OPTION
                 );
+                
+                if(confirmacion == JOptionPane.NO_OPTION) {
+                    JOptionPane.showMessageDialog(
+                        null, "Eliminacion cancelada", 
+                        "Eliminacion Cancelada", 
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+                    return;
+                }
 
                 JOptionPane.showMessageDialog(
                     null, 
@@ -149,11 +158,6 @@ public class ElMethod {
                     "Eliminacion Existosa", 
                     JOptionPane.INFORMATION_MESSAGE
                 );
-
-                
-                if(confirmacion == JOptionPane.NO_OPTION) {
-                    return;
-                }
 
                 for(int j = i; j < elArray.length -1; j++){
                     elArray[j] = elArray[j + 1];
@@ -234,6 +238,15 @@ public class ElMethod {
                     "Confirmar Edición", 
                     JOptionPane.YES_NO_OPTION
                 );
+
+                if(confirmacion == JOptionPane.NO_OPTION) {
+                    JOptionPane.showMessageDialog(
+                        null, "Edicion cancelada", 
+                        "Editar Cancelada", 
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+                    return;
+                }
 
                 if(confirmacion == JOptionPane.YES_OPTION){
                     String nombre = JOptionPane.showInputDialog(null,

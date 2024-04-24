@@ -113,7 +113,8 @@ public class JeansMethod {
                 jeansArray[almacen] = nuevoJeans;
 
                 JOptionPane.showMessageDialog(null, 
-                "Pantalon Jeans " + (almacen + 1), 
+                "Pantalon Jeans " + (almacen + 1) + " :\n" +
+                nuevoJeans.toString(), 
                 "Confirmacion de datos", JOptionPane.INFORMATION_MESSAGE);
             }
 
@@ -144,16 +145,23 @@ public class JeansMethod {
                     JOptionPane.YES_NO_OPTION
                 );
 
-                JOptionPane.showMessageDialog(
-                null, 
-                "Pantalon Jeans eliminado: \n " +
-                jeansArray[i].toString(), 
-                "Eliminacion Existosa", 
-                JOptionPane.INFORMATION_MESSAGE);
 
                 if(confirmacion == JOptionPane.NO_OPTION) {
+                    JOptionPane.showMessageDialog(
+                        null, "Eliminacion cancelada", 
+                        "Eliminacion Cancelada", 
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
                     return;
                 }
+
+                JOptionPane.showMessageDialog(
+                    null, 
+                    "Pantalon Jeans eliminado: \n " +
+                    jeansArray[i].toString(), 
+                    "Eliminacion Existosa", 
+                    JOptionPane.INFORMATION_MESSAGE
+                );
 
                 for(int j = i; j < jeansArray.length -1; j++){
                     jeansArray[j] = jeansArray[j + 1];
@@ -234,50 +242,59 @@ public class JeansMethod {
                     JOptionPane.YES_NO_OPTION
                 );
 
+                if(confirmacion == JOptionPane.NO_OPTION) {
+                    JOptionPane.showMessageDialog(
+                        null, "Edicion cancelada", 
+                        "Editar Cancelada", 
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+                    return;
+                }
+
                 if(confirmacion == JOptionPane.YES_OPTION){
                     String nombre = JOptionPane.showInputDialog(null,
-                "Ingrese el nombre del Pantalon Jeans " +  (i + 1) + ":", 
-                "NOMBRE");
+                    "Ingrese el nombre del Pantalon Jeans " +  (i + 1) + ":", 
+                    "NOMBRE");
 
-                double precio = Double.valueOf(JOptionPane.showInputDialog(null,
-                "Ingrese el precio del Pantalon Jeans " +  (i + 1) + ":", 
-                "00"));
+                    double precio = Double.valueOf(JOptionPane.showInputDialog(null,
+                    "Ingrese el precio del Pantalon Jeans " +  (i + 1) + ":", 
+                    "00"));
 
-                String color = JOptionPane.showInputDialog(null,
-                "Ingrese el color del Pantalon Jeans " +  (i + 1) + ":", 
-                "COLOR");
+                    String color = JOptionPane.showInputDialog(null,
+                    "Ingrese el color del Pantalon Jeans " +  (i + 1) + ":", 
+                    "COLOR");
 
-                String marca = JOptionPane.showInputDialog(null,
-                "Ingrese la marca del Pantalon Jeans " +  (i + 1) + ":", 
-                "MARCA");
+                    String marca = JOptionPane.showInputDialog(null,
+                    "Ingrese la marca del Pantalon Jeans " +  (i + 1) + ":", 
+                    "MARCA");
 
-                int talla = Integer.valueOf(JOptionPane.showInputDialog(null,
-                "Ingrese la talla del Pantalon Jeans " +  (i + 1) + ":", 
-                "00"));
+                    int talla = Integer.valueOf(JOptionPane.showInputDialog(null,
+                    "Ingrese la talla del Pantalon Jeans " +  (i + 1) + ":", 
+                    "00"));
 
-                String tela = JOptionPane.showInputDialog(null,
-                "Ingrese el material del Pantalon Jeans " +  (i + 1) + ":", 
-                "MATERIAL");
+                    String tela = JOptionPane.showInputDialog(null,
+                    "Ingrese el material del Pantalon Jeans " +  (i + 1) + ":", 
+                    "MATERIAL");
 
-                String corte = JOptionPane.showInputDialog(null,
-                "Ingrese la categoria del Pantalon Jeans " +  (i + 1) + ":", 
-                "CORTE");
+                    String corte = JOptionPane.showInputDialog(null,
+                    "Ingrese la categoria del Pantalon Jeans " +  (i + 1) + ":", 
+                    "CORTE");
 
-                Jeans nuevoJeans = new Jeans(nombre, 
-                precio, color, marca, talla, tela, corte);
+                    Jeans nuevoJeans = new Jeans(nombre, 
+                    precio, color, marca, talla, tela, corte);
 
-                jeansArray[i] = nuevoJeans;
+                    jeansArray[i] = nuevoJeans;
 
-                JOptionPane.showMessageDialog(
-                    null, 
-                    "Pantalon Jeans actualizado: \n" +
-                    nuevoJeans.toString(),
-                    "Actualizacion exitosa", 
-                    JOptionPane.INFORMATION_MESSAGE
-                );
+                    JOptionPane.showMessageDialog(
+                        null, 
+                        "Pantalon Jeans actualizado: \n" +
+                        nuevoJeans.toString(),
+                        "Actualizacion exitosa", 
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
 
-                printPantalonJeans();
-                return;
+                    printPantalonJeans();
+                    return;
                 }
 
             }

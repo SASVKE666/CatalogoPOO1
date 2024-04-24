@@ -94,7 +94,7 @@ public class CasualMethod {
 
                 String nombre = JOptionPane.showInputDialog(null, 
                 "Ingrese el nombre del Zapato Casual " + (almacen + 1) + ":",
-                "nombre");
+                "NOMBRE");
 
                 double precio = Double.valueOf(JOptionPane.showInputDialog(null, 
                 "Ingrese el precio del Zapato Casual " + (almacen + 1) + ":", 
@@ -193,6 +193,15 @@ public class CasualMethod {
                     JOptionPane.YES_NO_OPTION
                 );
 
+                if(confirmacion == JOptionPane.NO_OPTION) {
+                    JOptionPane.showMessageDialog(
+                        null, "Eliminacion cancelada", 
+                        "Eliminacion Cancelada", 
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+                    return;
+                }
+
                 JOptionPane.showMessageDialog(
                     null, 
                     "Zapato Casual eliminado: \n " +
@@ -200,10 +209,6 @@ public class CasualMethod {
                     "Eliminacion Existosa", 
                     JOptionPane.INFORMATION_MESSAGE
                 );
-
-                if(confirmacion == JOptionPane.NO_OPTION) {
-                    return;
-                }
 
                 for (int j = i; j < casualArray.length - 1; j++) {
                     casualArray[j] = casualArray[j + 1];
@@ -312,11 +317,20 @@ public class CasualMethod {
                     JOptionPane.YES_NO_OPTION
                 );
 
+                if(confirmacion == JOptionPane.NO_OPTION) {
+                    JOptionPane.showMessageDialog(
+                        null, "Edicion cancelada", 
+                        "Editar Cancelada", 
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+                    return;
+                }
+
                 if(confirmacion == JOptionPane.YES_OPTION){
 
                     String nombre = JOptionPane.showInputDialog(null, 
                     "Ingrese el nombre del Zapato Casual " + (i + 1) + ":",
-                    "nombre");
+                    "NOMBRE");
 
                     double precio = Double.valueOf(JOptionPane.showInputDialog(null, 
                     "Ingrese el precio del Zapato Casual " + (i + 1) + ":", 

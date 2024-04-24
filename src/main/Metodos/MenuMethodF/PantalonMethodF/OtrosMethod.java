@@ -110,8 +110,9 @@ public class OtrosMethod {
                 otrosArray[almacen] = nuevoOtros; 
 
                 JOptionPane.showMessageDialog(null, 
-                "Se han ingresado correctamente los datos del Pantalon Otros " + (i+1), 
-                "Confirmacion de datos", 1);
+                "Pantalon Otros " + (almacen + 1) + " : \n" +
+                nuevoOtros.toString(), 
+                "Confirmacion de datos", JOptionPane.INFORMATION_MESSAGE);
             }
 
             almacen ++;
@@ -140,6 +141,16 @@ public class OtrosMethod {
                     JOptionPane.YES_NO_OPTION
                 );
 
+                
+                if(confirmacion == JOptionPane.NO_OPTION) {
+                    JOptionPane.showMessageDialog(
+                        null, "Eliminacion cancelada", 
+                        "Eliminacion Cancelada", 
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+                    return;
+                }
+
                 JOptionPane.showMessageDialog(
                     null, 
                     "Pantalon Otros eliminado: \n " +
@@ -147,11 +158,6 @@ public class OtrosMethod {
                     "Eliminacion Existosa", 
                     JOptionPane.INFORMATION_MESSAGE
                 );
-
-                
-                if(confirmacion == JOptionPane.NO_OPTION) {
-                    return;
-                }
 
                 for(int j = i; j < otrosArray.length - 1; j++){
                     otrosArray[j] = otrosArray[j + 1];
@@ -234,6 +240,15 @@ public class OtrosMethod {
                     "Confirmar Edición", 
                     JOptionPane.YES_NO_OPTION
                 );
+
+                if(confirmacion == JOptionPane.NO_OPTION) {
+                    JOptionPane.showMessageDialog(
+                        null, "Edicion cancelada", 
+                        "Editar Cancelada", 
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+                    return;
+                }
 
                 if(confirmacion == JOptionPane.YES_OPTION) {
 

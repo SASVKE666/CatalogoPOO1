@@ -142,6 +142,16 @@ public class EllaMethod {
                     JOptionPane.YES_NO_OPTION
                 );
 
+                
+                if(confirmacion == JOptionPane.NO_OPTION) {
+                    JOptionPane.showMessageDialog(
+                        null, "Eliminacion cancelada", 
+                        "Eliminacion Cancelada", 
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+                    return;
+                }
+
                 JOptionPane.showMessageDialog(
                     null, 
                     "Camisa Ella eliminado: \n " +
@@ -149,11 +159,6 @@ public class EllaMethod {
                     "Eliminacion Existosa", 
                     JOptionPane.INFORMATION_MESSAGE
                 );
-
-                
-                if(confirmacion == JOptionPane.NO_OPTION) {
-                    return;
-                }
 
                 for(int j = i; j < ellaArray.length -1; j++){
                     ellaArray[j] = ellaArray[j + 1];
@@ -238,6 +243,15 @@ public class EllaMethod {
                     "Confirmar Edición", 
                     JOptionPane.YES_NO_OPTION
                 );
+
+                if(confirmacion == JOptionPane.NO_OPTION) {
+                    JOptionPane.showMessageDialog(
+                        null, "Edicion cancelada", 
+                        "Editar Cancelada", 
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+                    return;
+                }
 
                 if(confirmacion == JOptionPane.YES_OPTION){
                     String nombre = JOptionPane.showInputDialog(null,

@@ -142,6 +142,15 @@ public class TenisMethod {
                     JOptionPane.YES_NO_OPTION
                 );
 
+                if(confirmacion == JOptionPane.NO_OPTION) {
+                    JOptionPane.showMessageDialog(
+                        null, "Eliminacion cancelada", 
+                        "Eliminacion Cancelada", 
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+                    return;
+                }
+
                 JOptionPane.showMessageDialog(
                     null, 
                     "Zapato Tenis eliminado: \n " +
@@ -149,11 +158,6 @@ public class TenisMethod {
                     "Eliminacion Existosa", 
                     JOptionPane.INFORMATION_MESSAGE
                 );
-
-                
-                if(confirmacion == JOptionPane.NO_OPTION) {
-                    return;
-                }
 
                 for (int j = i; j < tenisArray.length - 1; j++) {
                     tenisArray[j] = tenisArray[j + 1];
@@ -237,51 +241,60 @@ public class TenisMethod {
                     JOptionPane.YES_NO_OPTION
                 );
 
+                if(confirmacion == JOptionPane.NO_OPTION) {
+                    JOptionPane.showMessageDialog(
+                        null, "Edicion cancelada", 
+                        "Editar Cancelada", 
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+                    return;
+                }
+
                 if(confirmacion == JOptionPane.YES_OPTION){
 
                     String nombre = JOptionPane.showInputDialog(null, 
-                "Ingrese el nombre del Zapato Tenis " + (i + 1) + ":",
-                "nombre");
+                    "Ingrese el nombre del Zapato Tenis " + (i + 1) + ":",
+                    "nombre");
 
-                double precio = Double.valueOf(JOptionPane.showInputDialog(null, 
-                "Ingrese el precio del Zapato Tenis " + (i + 1) + ":", 
-                "00"));
+                    double precio = Double.valueOf(JOptionPane.showInputDialog(null, 
+                    "Ingrese el precio del Zapato Tenis " + (i + 1) + ":", 
+                    "00"));
 
-                String color = JOptionPane.showInputDialog(null, 
-                "Ingrese el color del Zapato Tenis " + (i + 1) + ":", 
-                "COLOR");
+                    String color = JOptionPane.showInputDialog(null, 
+                    "Ingrese el color del Zapato Tenis " + (i + 1) + ":", 
+                    "COLOR");
 
-                String marca = JOptionPane.showInputDialog(null, 
-                "Ingrese la marca del Zapato Tenis " + (i + 1) + ":", 
-                "MARCA");
+                    String marca = JOptionPane.showInputDialog(null, 
+                    "Ingrese la marca del Zapato Tenis " + (i + 1) + ":", 
+                    "MARCA");
 
-                double talla = Double.valueOf(JOptionPane.showInputDialog(null, 
-                "Ingrese la talla del Zapato Tenis " + (i + 1) + ":", 
-                "00"));
+                    double talla = Double.valueOf(JOptionPane.showInputDialog(null, 
+                    "Ingrese la talla del Zapato Tenis " + (i + 1) + ":", 
+                    "00"));
 
-                String material = JOptionPane.showInputDialog(null, 
-                "Ingrese el material del Zapato Tenis " + (i + 1) + ":", 
-                "MATERIAL");
+                    String material = JOptionPane.showInputDialog(null, 
+                    "Ingrese el material del Zapato Tenis " + (i + 1) + ":", 
+                    "MATERIAL");
 
-                String deporte = JOptionPane.showInputDialog(null, 
-                "Ingrese el deporte del Zapato Tenis " + (i + 1) + ":", 
-                "DEPORTE");
-    
-                Tenis newProduct = new Tenis(nombre, 
-                precio, color, marca, talla, material, deporte);
+                    String deporte = JOptionPane.showInputDialog(null, 
+                    "Ingrese el deporte del Zapato Tenis " + (i + 1) + ":", 
+                    "DEPORTE");
+        
+                    Tenis newProduct = new Tenis(nombre, 
+                    precio, color, marca, talla, material, deporte);
 
-                tenisArray[i] = newProduct;
-    
-                JOptionPane.showMessageDialog(
-                    null, 
-                    "Zapato Tenis actualizado: \n" + 
-                    newProduct.toString(), 
-                    "Actualizacion Exitosa", 
-                    JOptionPane.INFORMATION_MESSAGE
-                );
-                
-                printZapatoTenis();
-                return;
+                    tenisArray[i] = newProduct;
+        
+                    JOptionPane.showMessageDialog(
+                        null, 
+                        "Zapato Tenis actualizado: \n" + 
+                        newProduct.toString(), 
+                        "Actualizacion Exitosa", 
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+                    
+                    printZapatoTenis();
+                    return;
 
                 }
             }
