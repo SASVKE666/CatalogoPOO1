@@ -19,7 +19,7 @@ public class CamisaMethod {
 
                 selectCamisa = JOptionPane.showOptionDialog(null,
                 "Seleccione una opción:",
-                "Menú",
+                "Camisa Menú",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.INFORMATION_MESSAGE,
                 null,
@@ -42,7 +42,8 @@ public class CamisaMethod {
                 }
 
             }catch(Exception e){
-                JOptionPane.showMessageDialog(null,"Ups! Error!");
+                JOptionPane.showMessageDialog(null,"Ups! Error!",
+                "Camisa Menu", JOptionPane.WARNING_MESSAGE);
             }
         }while(selectCamisa != 2);
     }

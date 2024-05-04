@@ -41,7 +41,8 @@ public class PantalonMethod {
                 }
 
             }catch(Exception e){
-                JOptionPane.showMessageDialog(null,"Ups! Error!");
+                JOptionPane.showMessageDialog(null,"Ups! Error!",
+                "Pantalon Error", JOptionPane.WARNING_MESSAGE);
             }
         
         }while(selectPantalon != 2);

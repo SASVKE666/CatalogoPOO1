@@ -25,12 +25,6 @@ public class MenuMethod {
                         null,
                         options,
                         options[0]);
-                    /* selectMenu = Integer.parseInt(JOptionPane.showInputDialog(null,"""
-                            1. Zapato
-                            2. Camisa
-                            3. Pantalon
-                            4. Salir
-                            ""","Ingrese un numero")); */
                                             
                     switch(selectMenu){
                         case 0:
@@ -46,7 +40,6 @@ public class MenuMethod {
                         break;
                         
                         case 3:
-                        //JOptionPane.showMessageDialog(null, "Bye Bye", "Adios", 2);
                         return;
                         
                     }
