@@ -57,7 +57,8 @@ public class OtrosMethod {
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Ups! Error!",
-                        "Pantalon Otros Menu", JOptionPane.WARNING_MESSAGE);
+                        "Pantalon Otros Menu",
+                         JOptionPane.WARNING_MESSAGE);
             }
         } while (selectPantalon != 5);
     }
@@ -65,9 +66,48 @@ public class OtrosMethod {
     public static void inputPantalonOtros() {
 
         try {
-            int count = Integer.valueOf(JOptionPane.showInputDialog(
-                    "Cuantos pantalones otros desea ingresar?",
-                    "01"));
+                int count;
+
+                while (true) {
+
+                        try {
+
+                                String input = JOptionPane.showInputDialog(null,
+                                                "¿Cuántos pantalones otros desea ingresar? ",
+                                                "01");
+
+                                if (input == null) {
+
+                                        JOptionPane.showMessageDialog(null, "Ingreso Cancelado",
+                                                        "Ingresar Zapato Casual",
+                                                        JOptionPane.WARNING_MESSAGE);
+                                        return;
+                                }
+
+                                count = Integer.valueOf(input);
+
+                                if (count <= 0) {
+                                        JOptionPane.showMessageDialog(
+                                                        null,
+                                                        "Debe ingresar obligatoriamente un número entero.",
+                                                        "Error",
+                                                        JOptionPane.ERROR_MESSAGE);
+
+                                } else {
+                                        // Rompe el bucle while una vez que se ha obtenido un valor válido para
+                                        // count.
+                                        break;
+                                }
+
+                        } catch (NumberFormatException e) {
+                                JOptionPane.showMessageDialog(
+                                                null,
+                                                "Debe ingresar obligatoriamente un número entero.",
+                                                "Error",
+                                                JOptionPane.ERROR_MESSAGE);
+                        }
+
+                }
 
             for (int i = 0; i < count; i++) {
 
@@ -78,33 +118,64 @@ public class OtrosMethod {
                     return;
 
                 } else {
-                    String nombre = JOptionPane.showInputDialog(null,
-                            "Ingrese el nombre del Pantalon Otros " + (almacen + 1) + ":",
-                            "NOMBRE");
+                        String nombre = JOptionPane.showInputDialog(null,
+                        "Ingrese el nombre del Pantalon Otros " + (almacen + 1) + ":",
+                        "NOMBRE");
+        if (nombre == null) {
+                throw new NullPointerException();
+        }
+        double precio;
+        while (true) {
+                try {
+                        precio = Double.valueOf(JOptionPane.showInputDialog(null,
+                                        "Ingrese el precio del Pantalon Otros " + (almacen + 1)
+                                                        + ":",
+                                        "00"));
+                        break;
+                } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "Ingrese un número", "Error",
+                                        JOptionPane.ERROR_MESSAGE);
+                }
+        }
 
-                    double precio = Double.valueOf(JOptionPane.showInputDialog(null,
-                            "Ingrese el precio del Pantalon Otros " + (almacen + 1) + ":",
-                            "00"));
+        String color = JOptionPane.showInputDialog(null,
+                        "Ingrese el color del Pantalon Otros " + (almacen + 1) + ":",
+                        "COLOR");
+        if (color == null) {
+                throw new NullPointerException();
+        }
+        String marca = JOptionPane.showInputDialog(null,
+                        "Ingrese la marca del Pantalon Otros " + (almacen + 1) + ":",
+                        "MARCA");
+        if (marca == null) {
+                throw new NullPointerException();
+        }
+        int talla;
+        while (true) {
+                try {
+                        talla = Integer.valueOf(JOptionPane.showInputDialog(null,
+                                        "Ingrese la talla del Pantalon Otros " + (almacen + 1)
+                                                        + ":",
+                                        "00"));
+                        break;
+                } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "Ingrese un número", "Error",
+                                        JOptionPane.ERROR_MESSAGE);
+                }
+        }
 
-                    String color = JOptionPane.showInputDialog(null,
-                            "Ingrese el color del Pantalon Otros " + (almacen + 1) + ":",
-                            "COLOR");
-
-                    String marca = JOptionPane.showInputDialog(null,
-                            "Ingrese la marca del Pantalon Otros " + (almacen + 1) + ":",
-                            "MARCA");
-
-                    int talla = Integer.valueOf(JOptionPane.showInputDialog(null,
-                            "Ingrese la talla del Pantalon Otros " + (almacen + 1) + ":",
-                            "00"));
-
-                    String tela = JOptionPane.showInputDialog(null,
-                            "Ingrese el material del Pantalon Otros " + (almacen + 1) + ":",
-                            "MATERIAL");
-
-                    String estilo = JOptionPane.showInputDialog(null,
-                            "Ingrese la categoria del Pantalon Otros " + (almacen + 1) + ":",
-                            "ESTILO");
+        String tela = JOptionPane.showInputDialog(null,
+                        "Ingrese el material del Pantalon Otros " + (almacen + 1) + ":",
+                        "MATERIAL");
+        if (tela == null) {
+                throw new NullPointerException();
+        }
+        String estilo = JOptionPane.showInputDialog(null,
+                        "Ingrese la categoria del Pantalon Otros " + (almacen + 1) + ":",
+                        "ESTILO");
+        if (estilo == null) {
+                throw new NullPointerException();
+        }
 
                     Otros nuevoOtros = new Otros(nombre,
                             precio, color, marca, talla, tela, estilo);
@@ -128,9 +199,39 @@ public class OtrosMethod {
     public static void erasePantalonOtros() {
 
         try {
-            int codeToErase = Integer.valueOf(
-                    JOptionPane.showInputDialog(
-                            "Ingrese el codigo del Pantalon Otros a eliminar"));
+                int codeToErase;
+                while (true) {
+                        try {
+                                String input = JOptionPane.showInputDialog(null,
+                                                "Ingrese el codigo del Pantalon Otros a eliminar",
+                                                "000");
+
+                                if (input == null) {
+                                        JOptionPane.showMessageDialog(null, "Eliminacion Cancelada",
+                                                        "Eliminar Pantalon Otros",
+                                                        JOptionPane.WARNING_MESSAGE);
+                                        return;
+                                }
+
+                                codeToErase = Integer.valueOf(input);
+                                if (codeToErase <= 0) {
+                                        JOptionPane.showMessageDialog(
+                                                        null,
+                                                        "Debe ingresar obligatoriamente un número entero.",
+                                                        "Error",
+                                                        JOptionPane.ERROR_MESSAGE);
+
+                                } else {
+                                        // Rompe el bucle while una vez que se ha obtenido un valor válido para
+                                        // count.
+                                        break;
+                                }
+
+                        } catch (NumberFormatException e) {
+                                JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                }
 
             Otros otrosErase = new Otros(codeToErase);
 
@@ -187,9 +288,37 @@ public class OtrosMethod {
     public static void findPantalonOtros() {
 
         try {
-            int codigoFind = Integer.valueOf(JOptionPane.showInputDialog(
-                    "Ingrese el código del Producto",
-                    "000"));
+                int codigoFind;
+                while (true) {
+                        try {
+                                String input = JOptionPane.showInputDialog(
+                                                "Ingrese el código del Producto",
+                                                "000");
+
+                                if (input == null) {
+                                        JOptionPane.showMessageDialog(null, "Busqueda Cancelada",
+                                                        "Buscar Producto",
+                                                        JOptionPane.WARNING_MESSAGE);
+                                        return;
+                                }
+                                codigoFind = Integer.valueOf(input);
+                                if (codigoFind <= 0) {
+                                        JOptionPane.showMessageDialog(
+                                                        null,
+                                                        "Debe ingresar obligatoriamente un número entero.",
+                                                        "Error",
+                                                        JOptionPane.ERROR_MESSAGE);
+
+                                } else {
+                                        // Rompe el bucle while una vez que se ha obtenido un valor válido para
+                                        // count.
+                                        break;
+                                }
+                        } catch (NumberFormatException e) {
+                                JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                }
             Otros otrosFind = new Otros(codigoFind);
 
             for (Otros otros : otrosArray) {
@@ -236,9 +365,39 @@ public class OtrosMethod {
     public static void editPantalonOtros() {
 
         try {
-            Integer codeToEdit = Integer.valueOf(
-                    JOptionPane.showInputDialog(
-                            "Ingrese el codigo del Pantalon Otros que va a cambiar"));
+                Integer codeToEdit ;
+                while (true) {
+                        try {
+                                String input = JOptionPane.showInputDialog(
+                                                "Ingrese el codigo del Pantalon Otros que va a cambiar",
+                                                "000");
+
+                                if (input == null) {
+                                        JOptionPane.showMessageDialog(null, "Edicion Cancelada",
+                                                        "Editar Pantalon Otros",
+                                                        JOptionPane.WARNING_MESSAGE);
+                                        return;
+                                }
+                                codeToEdit = Integer.valueOf(input);
+
+                                if (codeToEdit <= 0) {
+                                        JOptionPane.showMessageDialog(
+                                                        null,
+                                                        "Debe ingresar obligatoriamente un número entero.",
+                                                        "Error",
+                                                        JOptionPane.ERROR_MESSAGE);
+
+                                } else {
+                                        // Rompe el bucle while una vez que se ha obtenido un valor válido para
+                                        // count.
+                                        break;
+                                }
+
+                        } catch (NumberFormatException e) {
+                                JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                }
 
             Otros otrosFind = new Otros(codeToEdit);
 
@@ -263,32 +422,74 @@ public class OtrosMethod {
                     if (confirmacion == JOptionPane.YES_OPTION) {
 
                         String nombre = JOptionPane.showInputDialog(null,
-                                "Ingrese el nombre del Pantalón Otros:",
-                                otrosArray[i].getNombre());
+                                                                "Ingrese el nombre del Pantalon Otros " + (almacen + 1)
+                                                                                + ":",
+                                                                "NOMBRE");
+                                                if (nombre == null) {
+                                                        throw new NullPointerException();
+                                                }
+                                                double precio;
+                                                while (true) {
+                                                        try {
+                                                                precio = Double.valueOf(JOptionPane.showInputDialog(
+                                                                                null,
+                                                                                "Ingrese el precio del Pantalon Otros "
+                                                                                                + (almacen + 1)
+                                                                                                + ":",
+                                                                                "00"));
+                                                                break;
+                                                        } catch (NumberFormatException e) {
+                                                                JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                                                "Error",
+                                                                                JOptionPane.ERROR_MESSAGE);
+                                                        }
+                                                }
 
-                        double precio = Double.valueOf(JOptionPane.showInputDialog(null,
-                                "Ingrese el precio del Pantalón Otros:",
-                                otrosArray[i].getPrecio()));
+                                                String color = JOptionPane.showInputDialog(null,
+                                                                "Ingrese el color del Pantalon Otros " + (almacen + 1)
+                                                                                + ":",
+                                                                "COLOR");
+                                                if (color == null) {
+                                                        throw new NullPointerException();
+                                                }
+                                                String marca = JOptionPane.showInputDialog(null,
+                                                                "Ingrese la marca del Pantalon Otros " + (almacen + 1)
+                                                                                + ":",
+                                                                "MARCA");
+                                                if (marca == null) {
+                                                        throw new NullPointerException();
+                                                }
+                                                int talla;
+                                                while (true) {
+                                                        try {
+                                                                talla = Integer.valueOf(JOptionPane.showInputDialog(
+                                                                                null,
+                                                                                "Ingrese la talla del Pantalon Otros "
+                                                                                                + (almacen + 1)
+                                                                                                + ":",
+                                                                                "00"));
+                                                                break;
+                                                        } catch (NumberFormatException e) {
+                                                                JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                                                "Error",
+                                                                                JOptionPane.ERROR_MESSAGE);
+                                                        }
+                                                }
 
-                        String color = JOptionPane.showInputDialog(null,
-                                "Ingrese el color del Pantalón Otros:",
-                                otrosArray[i].getColor());
-
-                        String marca = JOptionPane.showInputDialog(null,
-                                "Ingrese la marca del Pantalón Otros:",
-                                otrosArray[i].getMarca());
-
-                        int talla = Integer.valueOf(JOptionPane.showInputDialog(null,
-                                "Ingrese la talla del Pantalón Otros:",
-                                otrosArray[i].getTalla()));
-
-                        String tela = JOptionPane.showInputDialog(null,
-                                "Ingrese el material del Pantalón Otros:",
-                                otrosArray[i].getTela());
-
-                        String estilo = JOptionPane.showInputDialog(null,
-                                "Ingrese la categoría del Pantalón Otros:",
-                                otrosArray[i].getEstilo());
+                                                String tela = JOptionPane.showInputDialog(null,
+                                                                "Ingrese el material del Pantalon Otros "
+                                                                                + (almacen + 1) + ":",
+                                                                "MATERIAL");
+                                                if (tela == null) {
+                                                        throw new NullPointerException();
+                                                }
+                                                String estilo = JOptionPane.showInputDialog(null,
+                                                                "Ingrese la categoria del Pantalon Otros "
+                                                                                + (almacen + 1) + ":",
+                                                                "ESTILO");
+                                                if (estilo == null) {
+                                                        throw new NullPointerException();
+                                                }
 
                         otrosArray[i].setNombre(nombre);
                         otrosArray[i].setPrecio(precio);
