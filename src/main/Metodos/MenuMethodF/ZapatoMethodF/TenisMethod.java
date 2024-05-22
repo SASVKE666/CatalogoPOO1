@@ -1,5 +1,9 @@
 package main.Metodos.MenuMethodF.ZapatoMethodF;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
 import javax.swing.JOptionPane;
 
 import main.Clases.Products.ZapatoF.Tenis;
@@ -10,6 +14,10 @@ public class TenisMethod {
         static int selectZapato = 0;
 
         static int almacen = 0;
+
+        static File infoZapatoTenis;
+        static FileWriter escribir;
+        static PrintWriter imprimir;
 
         static Tenis[] tenisArray = new Tenis[3];
 
@@ -65,6 +73,45 @@ public class TenisMethod {
                         }
 
                 } while (selectZapato != 5);
+        }
+
+        public static void writeToFileTenis() {
+                try {
+                        infoZapatoTenis = new File("src\\InfoProductos\\infoZapatoTenis.txt");
+
+                        /*
+                         * if (infoZapatoTenis.exists()){
+                         * infoZapatoTenis.delete();
+                         * }
+                         */
+
+                        if (!infoZapatoTenis.exists()) {
+                                infoZapatoTenis.createNewFile();
+                        }
+
+                        escribir = new FileWriter(infoZapatoTenis, true);
+
+                        imprimir = new PrintWriter(escribir);
+
+                        for (Tenis tenis : tenisArray) {
+                                if (tenis != null) {
+                                        imprimir.println(tenis.getNombre());
+                                        imprimir.println(tenis.getPrecio());
+                                        imprimir.println(tenis.getColor());
+                                        imprimir.println(tenis.getMarca());
+                                        imprimir.println(tenis.getTalla());
+                                        imprimir.println(tenis.getMaterial());
+                                        imprimir.println(tenis.getDeporte());
+                                }
+                        }
+
+                        imprimir.close();
+                        escribir.close();
+
+                } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Error al escribir en el archivo",
+                                        "Error", JOptionPane.ERROR_MESSAGE);
+                }
         }
 
         public static void inputZapatoTenis() {

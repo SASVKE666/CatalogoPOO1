@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import main.Metodos.MenuMethodF.CamisaMethod;
 import main.Metodos.MenuMethodF.PantalonMethod;
 import main.Metodos.MenuMethodF.ZapatoMethod;
+import main.Metodos.MenuMethodF.CamisaMethodF.ElMethod;
 
 public class MenuMethod {
     
@@ -40,6 +41,7 @@ public class MenuMethod {
                         break;
                         
                         case 3:
+                        ElMethod.writeToFileEl();
                         return;
                         
                     }

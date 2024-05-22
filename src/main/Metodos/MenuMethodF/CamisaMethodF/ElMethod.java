@@ -1,5 +1,9 @@
 package main.Metodos.MenuMethodF.CamisaMethodF;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
 import javax.swing.JOptionPane;
 
 import main.Clases.Products.CamisaF.El;
@@ -12,6 +16,10 @@ public class ElMethod {
         static int selectCamisa = 0;
 
         static int almacen = 0;
+
+        static File infoCamisaEl;
+        static FileWriter escribir;
+        static PrintWriter imprimir;
 
         public static void camisaEl() {
                 do {
@@ -62,6 +70,45 @@ public class ElMethod {
                 } while (selectCamisa != 5);
         }
 
+        public static void writeToFileEl() {
+                try {
+                        infoCamisaEl = new File("src\\InfoProductos\\infoCamisaEl.txt");
+
+                        /*
+                         * if (infoCamisaEl.exists()) {
+                         * infoCamisaEl.delete();
+                         * }
+                         */
+
+                        if (!infoCamisaEl.exists()) {
+                                infoCamisaEl.createNewFile();
+                        }
+
+                        escribir = new FileWriter(infoCamisaEl, true);
+
+                        imprimir = new PrintWriter(escribir);
+
+                        for (El el : elArray) {
+                                if (el != null) {
+                                        imprimir.println(el.getNombre());
+                                        imprimir.println(el.getPrecio());
+                                        imprimir.println(el.getColor());
+                                        imprimir.println(el.getMarca());
+                                        imprimir.println(el.getTalla());
+                                        imprimir.println(el.getTela());
+                                        imprimir.println(el.getTipo());
+                                }
+                        }
+
+                        imprimir.close();
+                        escribir.close();
+
+                } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Error al escribir en el archivo",
+                                        "Error", JOptionPane.ERROR_MESSAGE);
+                }
+        }
+
         public static void inputCamisaEl() {
 
                 try {
@@ -105,67 +152,78 @@ public class ElMethod {
 
                         for (int i = 0; i < count; i++) {
 
-                                String nombre = JOptionPane.showInputDialog(null,
-                                                "Ingrese el nombre de la Camisa para El " + (almacen + 1) + ":",
-                                                "NOMBRE");
-                                if (nombre == null) {
-                                        throw new NullPointerException();
-                                }
-                                double precio;
-                                while (true) {
-                                        try {
-                                                precio = Double.valueOf(JOptionPane.showInputDialog(null,
-                                                                "Ingrese el precio de la Camisa para El "
-                                                                                + (almacen + 1) + ":",
-                                                                "00"));
-                                                break;
-                                        } catch (NumberFormatException e) {
-                                                JOptionPane.showMessageDialog(null, "Ingrese un número", "Error",
-                                                                JOptionPane.ERROR_MESSAGE);
+                                if (almacen >= elArray.length) {
+                                        JOptionPane.showMessageDialog(null,
+                                                        "El almacen de camisas para el está lleno. No se pueden agregar más productos.",
+                                                        "Almacen Lleno", JOptionPane.WARNING_MESSAGE);
+                                        return;
+
+                                } else {
+                                        String nombre = JOptionPane.showInputDialog(null,
+                                                        "Ingrese el nombre de la Camisa para El " + (almacen + 1) + ":",
+                                                        "NOMBRE");
+                                        if (nombre == null) {
+                                                throw new NullPointerException();
                                         }
-                                }
+                                        double precio;
+                                        while (true) {
+                                                try {
+                                                        precio = Double.valueOf(JOptionPane.showInputDialog(null,
+                                                                        "Ingrese el precio de la Camisa para El "
+                                                                                        + (almacen + 1) + ":",
+                                                                        "00"));
+                                                        break;
+                                                } catch (NumberFormatException e) {
+                                                        JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                                        "Error",
+                                                                        JOptionPane.ERROR_MESSAGE);
+                                                }
+                                        }
 
-                                String color = JOptionPane.showInputDialog(null,
-                                                "Ingrese el color de la Camisa para El " + (almacen + 1) + ":",
-                                                "COLOR");
-                                if (color == null) {
-                                        throw new NullPointerException();
-                                }
-                                String marca = JOptionPane.showInputDialog(null,
-                                                "Ingrese la marca de la Camisa para El " + (almacen + 1) + ":",
-                                                "MARCA");
-                                if (marca == null) {
-                                        throw new NullPointerException();
-                                }
-                                String talla = JOptionPane.showInputDialog(null,
-                                                "Ingrese la talla de la Camisa para El " + (almacen + 1) + ":",
-                                                "TALLA");
-                                if (talla == null) {
-                                        throw new NullPointerException();
-                                }
-                                String tela = JOptionPane.showInputDialog(null,
-                                                "Ingrese el material de la Camisa para El " + (almacen + 1) + ":",
-                                                "MATERIAL");
-                                if (tela == null) {
-                                        throw new NullPointerException();
-                                }
-                                String tipo = JOptionPane.showInputDialog(null,
-                                                "Ingrese la categoria de la Camisa para El " + (almacen + 1) + ":",
-                                                "TIPO");
-                                if (tipo == null) {
-                                        throw new NullPointerException();
-                                }
+                                        String color = JOptionPane.showInputDialog(null,
+                                                        "Ingrese el color de la Camisa para El " + (almacen + 1) + ":",
+                                                        "COLOR");
+                                        if (color == null) {
+                                                throw new NullPointerException();
+                                        }
+                                        String marca = JOptionPane.showInputDialog(null,
+                                                        "Ingrese la marca de la Camisa para El " + (almacen + 1) + ":",
+                                                        "MARCA");
+                                        if (marca == null) {
+                                                throw new NullPointerException();
+                                        }
+                                        String talla = JOptionPane.showInputDialog(null,
+                                                        "Ingrese la talla de la Camisa para El " + (almacen + 1) + ":",
+                                                        "TALLA");
+                                        if (talla == null) {
+                                                throw new NullPointerException();
+                                        }
+                                        String tela = JOptionPane.showInputDialog(null,
+                                                        "Ingrese el material de la Camisa para El " + (almacen + 1)
+                                                                        + ":",
+                                                        "MATERIAL");
+                                        if (tela == null) {
+                                                throw new NullPointerException();
+                                        }
+                                        String tipo = JOptionPane.showInputDialog(null,
+                                                        "Ingrese la categoria de la Camisa para El " + (almacen + 1)
+                                                                        + ":",
+                                                        "TIPO");
+                                        if (tipo == null) {
+                                                throw new NullPointerException();
+                                        }
 
-                                El nuevoEl = new El(nombre,
-                                                precio, color, marca, talla, tela, tipo);
+                                        El nuevoEl = new El(nombre,
+                                                        precio, color, marca, talla, tela, tipo);
 
-                                elArray[almacen] = nuevoEl;
+                                        elArray[almacen] = nuevoEl;
 
-                                JOptionPane.showMessageDialog(null,
-                                                "Camisa El " + (almacen + 1) + " :\n" +
-                                                                nuevoEl.toString(),
-                                                "Confirmacion de datos", JOptionPane.INFORMATION_MESSAGE);
-                                almacen++;
+                                        JOptionPane.showMessageDialog(null,
+                                                        "Camisa El " + (almacen + 1) + " :\n" +
+                                                                        nuevoEl.toString(),
+                                                        "Confirmacion de datos", JOptionPane.INFORMATION_MESSAGE);
+                                        almacen++;
+                                }
                         }
 
                 } catch (Exception e) {
