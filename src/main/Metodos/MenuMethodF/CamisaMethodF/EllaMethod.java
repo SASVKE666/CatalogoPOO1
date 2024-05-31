@@ -70,9 +70,9 @@ public class EllaMethod {
                 } while (selectCamisa != 5);
         }
 
-        public static void writeToFileEl() {
+        public static void writeToFileElla() {
                 try {
-                        infoCamisaElla = new File("src\\InfoProductos\\infoCamisaEl.txt");
+                        infoCamisaElla = new File("src\\InfoProductos\\infoCamisaElla.txt");
 
                         /*
                          * if (infoCamisaElla.exists()) {
