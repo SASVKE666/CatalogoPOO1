@@ -1,7 +1,10 @@
 package main.Metodos.MenuMethodF.CamisaMethodF;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.swing.JOptionPane;
@@ -68,6 +71,46 @@ public class EllaMethod {
                                                 "Camisa Ella Menu", JOptionPane.WARNING_MESSAGE);
                         }
                 } while (selectCamisa != 5);
+        }
+
+        public static void readerFileElla() {
+                try (FileReader lector = new FileReader(infoCamisaElla);
+                                BufferedReader almacen = new BufferedReader(lector)) {
+
+                        for (int i = 0; i < ellaArray.length; i++) {
+
+                                String nombre = almacen.readLine();
+                                if (nombre == null) {
+                                        break;
+                                }
+
+                                double precio = Double.parseDouble(almacen.readLine());
+                                String color = almacen.readLine();
+                                String marca = almacen.readLine();
+                                String talla = almacen.readLine();
+                                String tela = almacen.readLine();
+                                String estilo = almacen.readLine();
+
+                                Ella nuevoElla = new Ella(
+                                                nombre,
+                                                precio,
+                                                color,
+                                                marca,
+                                                talla,
+                                                tela,
+                                                estilo);
+                                ellaArray[i] = nuevoElla;
+                        }
+
+                        for (Ella ella : ellaArray) {
+                                if (ella != null) {
+                                        System.out.println(ella.toString());
+                                }
+                        }
+
+                } catch (IOException | NumberFormatException e) {
+                        System.out.println(e);
+                }
         }
 
         public static void writeToFileElla() {

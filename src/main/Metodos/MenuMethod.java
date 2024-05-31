@@ -48,7 +48,7 @@ public class MenuMethod {
                         break;
                         
                         case 3:
-                        initializeMethods();
+                        initializeWriteToFileMethods();
                         return;
                         
                     }
@@ -61,7 +61,18 @@ public class MenuMethod {
             }while(selectMenu != 3);
     }
 
-    public static void initializeMethods(){
+    public static void initializeReaderFileMethods(){
+        ElMethod.readerFileEl();
+        //EllaMethod.readerFileElla();
+
+        //JeansMethod.readerFileJeans();
+        //OtrosMethod.readerFileOtros();
+
+        CasualMethod.readerFileCasual();
+        //TenisMethod.readerFileTenis();
+    }
+
+    public static void initializeWriteToFileMethods(){
         EllaMethod.writeToFileElla();
         ElMethod.writeToFileEl();
 

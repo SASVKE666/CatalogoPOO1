@@ -1,7 +1,10 @@
 package main.Metodos.MenuMethodF.ZapatoMethodF;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.swing.JOptionPane;
@@ -73,6 +76,46 @@ public class TenisMethod {
                         }
 
                 } while (selectZapato != 5);
+        }
+
+        public static void readerFileTenis() {
+                try (FileReader lector = new FileReader(infoZapatoTenis);
+                                BufferedReader almacen = new BufferedReader(lector)) {
+
+                        for (int i = 0; i < tenisArray.length; i++) {
+
+                                String nombre = almacen.readLine();
+                                if (nombre == null) {
+                                        break;
+                                }
+
+                                double precio = Double.parseDouble(almacen.readLine());
+                                String color = almacen.readLine();
+                                String marca = almacen.readLine();
+                                double talla = Double.parseDouble(almacen.readLine());
+                                String material = almacen.readLine();
+                                String deporte = almacen.readLine();
+
+                                Tenis nuevoTenis = new Tenis(
+                                                nombre,
+                                                precio,
+                                                color,
+                                                marca,
+                                                talla,
+                                                material,
+                                                deporte);
+                                tenisArray[i] = nuevoTenis;
+                        }
+
+                        for (Tenis tenis : tenisArray) {
+                                if (tenis != null) {
+                                        System.out.println(tenis.toString());
+                                }
+                        }
+
+                } catch (IOException | NumberFormatException e) {
+                        System.out.println(e);
+                }
         }
 
         public static void writeToFileTenis() {

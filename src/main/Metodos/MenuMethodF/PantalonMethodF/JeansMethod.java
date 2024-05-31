@@ -1,7 +1,10 @@
 package main.Metodos.MenuMethodF.PantalonMethodF;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.swing.JOptionPane;
@@ -69,6 +72,46 @@ public class JeansMethod {
                                                 JOptionPane.WARNING_MESSAGE);
                         }
                 } while (selectPantalon != 5);
+        }
+
+        public static void readerFileJeans() {
+                try (FileReader lector = new FileReader(infoPantalonJeans);
+                                BufferedReader almacen = new BufferedReader(lector)) {
+
+                        for (int i = 0; i < jeansArray.length; i++) {
+
+                                String nombre = almacen.readLine();
+                                if (nombre == null) {
+                                        break;
+                                }
+
+                                double precio = Double.parseDouble(almacen.readLine());
+                                String color = almacen.readLine();
+                                String marca = almacen.readLine();
+                                int talla = Integer.valueOf(almacen.readLine());
+                                String tela = almacen.readLine();
+                                String corte = almacen.readLine();
+
+                                Jeans nuevoJeans = new Jeans(
+                                                nombre,
+                                                precio,
+                                                color,
+                                                marca,
+                                                talla,
+                                                tela,
+                                                corte);
+                                jeansArray[i] = nuevoJeans;
+                        }
+
+                        for (Jeans jeans : jeansArray) {
+                                if (jeans != null) {
+                                        System.out.println(jeans.toString());
+                                }
+                        }
+
+                } catch (IOException | NumberFormatException e) {
+                        System.out.println(e);
+                }
         }
 
         public static void writeToFileJeans() {

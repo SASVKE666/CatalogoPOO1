@@ -1,7 +1,10 @@
 package main.Metodos.MenuMethodF.ZapatoMethodF;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.swing.JOptionPane;
@@ -13,14 +16,14 @@ public class CasualMethod {
 
         static int selectZapato = 0;
 
-        static Casual[] casualArray = new Casual[3];
+        static Casual[] casualArray = new Casual[5];
 
         static int almacen = 0;
         /*
          * variable estática tipo File. Esta variable representa un archivo en el
          * sistema.
          */
-        static File infoZapatoCasual;
+        static File infoZapatoCasual = new File("src\\InfoProductos\\infoZapatoCasual.txt");
         /*
          * variable estática tipo FileWriter. Variable se utilizará para escribir en el
          * archivo.
@@ -31,6 +34,48 @@ public class CasualMethod {
          * en el archivo.
          */
         static PrintWriter imprimir;
+
+        public static void readerFileCasual() {
+                try (FileReader lector = new FileReader(infoZapatoCasual);
+                                BufferedReader almacen = new BufferedReader(lector)) {
+
+                        for (int i = 0; i < casualArray.length; i++) {
+
+                                String nombre = almacen.readLine();
+
+                                if (nombre == null) {
+                                        break;
+                                }
+
+                                double precio = Double.parseDouble(almacen.readLine());
+                                String color = almacen.readLine();
+                                String marca = almacen.readLine();
+                                double talla = Double.valueOf(almacen.readLine());
+                                String material = almacen.readLine();
+                                String categoria = almacen.readLine();
+
+                                
+                                Casual newCasual = new Casual(
+                                                nombre,
+                                                precio,
+                                                color,
+                                                marca,
+                                                talla,
+                                                material,
+                                                categoria);
+                                casualArray[i] = newCasual;
+                        }
+
+                        for (Casual casual : casualArray) {
+                                if (casual != null) {
+                                        System.out.println(casual.toString());
+                                }
+                        }
+
+                } catch (IOException | NumberFormatException e) {
+                        System.out.println(e);
+                }
+        }
 
         public static void zapatoCasual() {
                 do {
@@ -90,7 +135,7 @@ public class CasualMethod {
                          * Se crea un nuevo objeto File llamado infoZapatoCasual que representa el
                          * archivo "infoZapatoCasual.txt" en el sistema de archivos.
                          */
-                        infoZapatoCasual = new File("src\\InfoProductos\\infoZapatoCasual.txt");
+                        // infoZapatoCasual = new File("src\\InfoProductos\\infoZapatoCasual.txt");
 
                         /*
                          * Se comprueba si el archivo "infoZapatoCasual.txt" ya existe en el sistema de

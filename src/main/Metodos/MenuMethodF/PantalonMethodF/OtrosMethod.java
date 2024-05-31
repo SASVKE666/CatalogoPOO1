@@ -1,7 +1,10 @@
 package main.Metodos.MenuMethodF.PantalonMethodF;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.swing.JOptionPane;
@@ -69,6 +72,39 @@ public class OtrosMethod {
                                                 JOptionPane.WARNING_MESSAGE);
                         }
                 } while (selectPantalon != 5);
+        }
+
+        public static void readerFileOtros() {
+                try (FileReader lector = new FileReader(infoPantalonOtros);
+                                BufferedReader almacen = new BufferedReader(lector)) {
+
+                        for (int i = 0; i < otrosArray.length; i++) {
+
+                                String nombre = almacen.readLine();
+                                if (nombre == null) {
+                                        break;
+                                }
+
+                                double precio = Double.parseDouble(almacen.readLine());
+                                String color = almacen.readLine();
+                                String marca = almacen.readLine();
+                                int talla = Integer.valueOf(almacen.readLine());
+                                String tela = almacen.readLine();
+                                String estilo = almacen.readLine();
+
+                                Otros nuevoOtros = new Otros(nombre, precio, color, marca, talla, tela, estilo);
+                                otrosArray[i] = nuevoOtros;
+                        }
+
+                        for (Otros otros : otrosArray) {
+                                if (otros != null) {
+                                        System.out.println(otros.toString());
+                                }
+                        }
+
+                } catch (IOException | NumberFormatException e) {
+                        System.out.println(e);
+                }
         }
 
         public static void writeToFileOtros() {
