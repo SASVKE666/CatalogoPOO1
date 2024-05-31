@@ -16,6 +16,8 @@ public class MenuMethod {
     
     static int selectMenu = 0;
 
+    
+
     public static void menu(){
             //Try catch para evitar que el programa termine si hay un error
             do{
@@ -46,16 +48,7 @@ public class MenuMethod {
                         break;
                         
                         case 3:
-
-                        EllaMethod.writeToFileElla();
-                        ElMethod.writeToFileEl();
-
-                        JeansMethod.writeToFileJeans();
-                        OtrosMethod.writeToFileOtros();
-
-                        CasualMethod.writeToFileCasual();
-                        TenisMethod.writeToFileTenis();
-
+                        initializeMethods();
                         return;
                         
                     }
@@ -66,5 +59,16 @@ public class MenuMethod {
                     "ERROR MENU",JOptionPane.WARNING_MESSAGE);
                 }
             }while(selectMenu != 3);
+    }
+
+    public static void initializeMethods(){
+        EllaMethod.writeToFileElla();
+        ElMethod.writeToFileEl();
+
+        JeansMethod.writeToFileJeans();
+        OtrosMethod.writeToFileOtros();
+
+        CasualMethod.writeToFileCasual();
+        TenisMethod.writeToFileTenis();
     }
 }
