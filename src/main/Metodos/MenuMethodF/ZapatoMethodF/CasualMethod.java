@@ -36,34 +36,62 @@ public class CasualMethod {
         static PrintWriter imprimir;
 
         public static void readerFileCasual() {
+                int contadorArray = 0; 
                 try (FileReader lector = new FileReader(infoZapatoCasual);
                                 BufferedReader almacen = new BufferedReader(lector)) {
-
+                        double precio = 0.0;
+                        String color = "";
+                        String marca = "";
+                        double talla = 0.0;
+                        String material = "";
+                        String categoria = "";
                         for (int i = 0; i < casualArray.length; i++) {
-
                                 String nombre = almacen.readLine();
-
                                 if (nombre == null) {
                                         break;
+                                } else {
+                                        try {
+                                                String precioStr = almacen.readLine();
+                                                if (precioStr != null) {
+                                                        precio = Double.parseDouble(precioStr.trim());
+                                                }
+                                                String colorStr = almacen.readLine();
+                                                if (colorStr != null) {
+                                                        color = colorStr.trim();
+                                                }
+                                                String marcaStr = almacen.readLine();
+                                                if (marcaStr != null) {
+                                                        marca = marcaStr.trim();
+                                                }
+                                                String tallaStr = almacen.readLine();
+                                                if (tallaStr != null) {
+                                                        talla = Double.parseDouble(tallaStr.trim());
+                                                }
+                                                String materialStr = almacen.readLine();
+                                                if (materialStr != null) {
+                                                        material = materialStr.trim();
+                                                }
+                                                String categoriaStr = almacen.readLine();
+                                                if (categoriaStr != null) {
+                                                        categoria = categoriaStr.trim();
+                                                } 
+
+                                        } catch (NumberFormatException e) {
+                                                System.out.println("Error al convertir a número: " + e.getMessage());
+                                        }
+
+                                        Casual newCasual = new Casual(
+                                                        nombre,
+                                                        precio,
+                                                        color,
+                                                        marca,
+                                                        talla,
+                                                        material,
+                                                        categoria);
+                                        casualArray[i] = newCasual;
+                                        contadorArray++;
                                 }
 
-                                double precio = Double.parseDouble(almacen.readLine());
-                                String color = almacen.readLine();
-                                String marca = almacen.readLine();
-                                double talla = Double.valueOf(almacen.readLine());
-                                String material = almacen.readLine();
-                                String categoria = almacen.readLine();
-
-                                
-                                Casual newCasual = new Casual(
-                                                nombre,
-                                                precio,
-                                                color,
-                                                marca,
-                                                talla,
-                                                material,
-                                                categoria);
-                                casualArray[i] = newCasual;
                         }
 
                         for (Casual casual : casualArray) {
@@ -75,6 +103,7 @@ public class CasualMethod {
                 } catch (IOException | NumberFormatException e) {
                         System.out.println(e);
                 }
+                almacen = contadorArray;
         }
 
         public static void zapatoCasual() {
@@ -165,7 +194,7 @@ public class CasualMethod {
                          * escribir en el archivo "infoZapatoCasual.txt". El parámetro true indica que
                          * se añadirán los datos al final del archivo si este ya existe.
                          */
-                        escribir = new FileWriter(infoZapatoCasual, true);
+                        escribir = new FileWriter(infoZapatoCasual, false);
 
                         /*
                          * Se crea un nuevo objeto PrintWriter llamado imprimir, que se utilizará para
@@ -320,7 +349,7 @@ public class CasualMethod {
 
                                         String categoria = JOptionPane.showInputDialog(null,
                                                         "Ingrese la categoría del Zapato Casual " + (almacen + 1) + ":",
-                                                        "CATEGORÍA");
+                                                        "CATEGORIA");
                                         if (categoria == null) {
                                                 throw new NullPointerException();
                                         }

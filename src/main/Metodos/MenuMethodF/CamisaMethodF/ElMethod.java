@@ -25,70 +25,55 @@ public class ElMethod {
         static PrintWriter imprimir;
 
         public static void readerFileEl() {
+                int contadorArray = 0; 
                 try (FileReader lector = new FileReader(infoCamisaEl);
                                 BufferedReader almacen = new BufferedReader(lector)) {
-
+                        double precio = 0.0;
+                        String color = "";
+                        String marca = "";
+                        String talla = "";
+                        String tela = "";
+                        String tipo = "";
                         for (int i = 0; i < elArray.length; i++) {
 
-                                String nombre = "almacen.readLine().trim()";
-                                String nombreStr = almacen.readLine();
-                                if (nombreStr != null) {
-                                        nombre = nombreStr.trim();
-                                }
+                                String nombre = almacen.readLine();
+
                                 if (nombre == null) {
                                         break;
-                                }
+                                } else {
+                                        try {
+                                                String precioStr = almacen.readLine();
+                                                if (precioStr != null) {
+                                                        precio = Double.parseDouble(precioStr.trim());
+                                                }
+                                                String colorStr = almacen.readLine();
+                                                if (colorStr != null) {
+                                                        color = colorStr.trim();
+                                                }
+                                                String marcaStr = almacen.readLine();
+                                                if (marcaStr != null) {
+                                                        marca = marcaStr.trim();
+                                                }
+                                                String tallaStr = almacen.readLine();
+                                                if (tallaStr != null) {
+                                                        talla = tallaStr.trim();
+                                                }
+                                                String telaStr = almacen.readLine();
+                                                if (telaStr != null) {
+                                                        tela = telaStr.trim();
+                                                }
+                                                String tipoStr = almacen.readLine();
+                                                if (tipoStr != null) {
+                                                        tipo = tipoStr.trim();
+                                                }
+                                        } catch (NumberFormatException e) {
+                                                System.out.println(e);
+                                        }
 
-                                // double precio = Double.parseDouble(almacen.readLine().trim());
-                                double precio = 10;
-                                String precioStr = almacen.readLine();
-                                if (precioStr != null) {
-                                        precio = Double.parseDouble(precioStr.trim());
+                                        El nuevoEl = new El(nombre, precio, color, marca, talla, tela, tipo);
+                                        elArray[i] = nuevoEl;
+                                        contadorArray ++;
                                 }
-                                // String color = almacen.readLine().trim();
-                                String color = "malo";
-                                String colorStr = almacen.readLine();
-                                if (colorStr != null) {
-                                        color = colorStr.trim();
-                                }
-
-                                String marca = "";
-                                String marcaStr = almacen.readLine();
-                                if (marcaStr != null) {
-                                        marca = marcaStr.trim();
-                                }
-
-                                String talla = "";
-                                String tallaStr = almacen.readLine();
-                                if (tallaStr != null) {
-                                        talla = tallaStr.trim();
-                                }
-
-                                String tela = "";
-                                String telaStr = almacen.readLine();
-                                if (telaStr != null) {
-                                        tela = telaStr.trim();
-                                }
-
-                                String tipo = "";
-                                String tipoStr = almacen.readLine();
-                                if (tipoStr != null) {
-                                        tipo = tipoStr.trim();
-                                }
-                                // String marca = almacen.readLine().trim();
-                                // String talla = almacen.readLine().trim();
-                                // String tela = almacen.readLine().trim();
-                                // String tipo = almacen.readLine().trim();
-
-                                El nuevoEl = new El(
-                                                nombre,
-                                                precio,
-                                                color,
-                                                marca,
-                                                talla,
-                                                tela,
-                                                tipo);
-                                elArray[i] = nuevoEl;
                         }
 
                         for (El el : elArray) {
@@ -100,6 +85,7 @@ public class ElMethod {
                 } catch (IOException | NumberFormatException e) {
                         System.out.println(e);
                 }
+                almacen = contadorArray;
         }
 
         public static void camisaEl() {
@@ -164,7 +150,7 @@ public class ElMethod {
                                 infoCamisaEl.createNewFile();
                         }
 
-                        escribir = new FileWriter(infoCamisaEl, true);
+                        escribir = new FileWriter(infoCamisaEl, false);
 
                         imprimir = new PrintWriter(escribir);
 
