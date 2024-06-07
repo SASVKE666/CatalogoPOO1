@@ -1,41 +1,43 @@
 package main.Clases.Products.CamisaF;
+
 import main.Clases.Products.Camisa;
 
-public class Ella extends Camisa{
+public class Ella extends Camisa {
 
-    //  attributes
+    // attributes
     private String estilo;
 
-    //constructos
-    public Ella(){
+    // constructos
+    public Ella() {
         super();
     }
 
-    public Ella(int codigo){
+    public Ella(int codigo) {
         super(codigo);
     }
 
-    public Ella(String nombre, double precio,  String color, String marca, String talla, String tela, String estilo){
-        super(nombre, precio, color, marca, talla, tela);
+    public Ella(String nombre, double precio, String color, 
+    String marca, double venta, int cant, String talla,
+            String tela, String estilo) {
+        super(nombre, precio, color, marca, venta, cant, talla, tela);
         this.estilo = estilo;
     }
 
-    //  getters
-    public String getEstilo(){
+    // getters
+    public String getEstilo() {
         return this.estilo;
     }
 
-    //  setters
-    public void setEstilo(String estilo){
+    // setters
+    public void setEstilo(String estilo) {
         this.estilo = estilo;
     }
 
-    //  toString method
+    // toString method
     @Override
-    public String toString(){
-        return 
-        super.toString() + 
-        "\nEstilo: " + this.estilo;
+    public String toString() {
+        return super.toString() +
+                "\nEstilo: " + this.estilo;
     }
 
     @Override

@@ -15,8 +15,13 @@ public class Otros extends Pantalon{
         super(codigo);
     }
 
-    public Otros(String nombre, double precio, String color, String marca, int talla, String tela, String estilo){
-        super(nombre, precio, color, marca, talla, tela);
+
+
+    
+
+    public Otros(String nombre, double precio, String color, String marca, double venta, int cant, int talla,
+            String tela, String estilo) {
+        super(nombre, precio, color, marca, venta, cant, talla, tela);
         this.estilo = estilo;
     }
 

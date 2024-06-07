@@ -16,8 +16,11 @@ public class Pantalon extends Producto{
         super(codigo);
     }
 
-    public Pantalon(String nombre, double precio, String color, String marca, int talla, String tela){
-        super(nombre, precio, color, marca);
+
+
+    public Pantalon(String nombre, double precio, String color,String marca,  double venta, int cant,
+            int talla, String tela) {
+        super(nombre, precio, marca, color, venta, cant);
         this.talla = talla;
         this.tela = tela;
     }

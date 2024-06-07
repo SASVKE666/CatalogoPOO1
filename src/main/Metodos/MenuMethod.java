@@ -63,13 +63,13 @@ public class MenuMethod {
 
     public static void initializeReaderFileMethods(){
         ElMethod.readerFileEl();
-        //EllaMethod.readerFileElla();
+        EllaMethod.readerFileElla();
 
-        //JeansMethod.readerFileJeans();
-        //OtrosMethod.readerFileOtros();
+        JeansMethod.readerFileJeans();
+        OtrosMethod.readerFileOtros();
 
         CasualMethod.readerFileCasual();
-        //TenisMethod.readerFileTenis();
+        TenisMethod.readerFileTenis();
     }
 
     public static void initializeWriteToFileMethods(){

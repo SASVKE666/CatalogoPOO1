@@ -20,7 +20,7 @@ public class OtrosMethod {
 
         static int almacen = 0;
 
-        static File infoPantalonOtros;
+        static File infoPantalonOtros= new File("src\\InfoProductos\\infoPantalonOtros.txt");
         static FileWriter escribir;
         static PrintWriter imprimir;
 
@@ -75,25 +75,78 @@ public class OtrosMethod {
         }
 
         public static void readerFileOtros() {
+                int contadorArray = 0;
                 try (FileReader lector = new FileReader(infoPantalonOtros);
                                 BufferedReader almacen = new BufferedReader(lector)) {
-
+                        double precio = 0.0;
+                        int codigo = 0;
+                        String color = "";
+                        String marca = "";
+                        double venta = 0.0;
+                        int cant = 0;
+                        int talla = 0;
+                        String tela = "";
+                        String estilo = "";
                         for (int i = 0; i < otrosArray.length; i++) {
-
                                 String nombre = almacen.readLine();
                                 if (nombre == null) {
                                         break;
+                                } else {
+                                        try {
+                                                String precioStr = almacen.readLine();
+                                                if (precioStr != null) {
+                                                        precio = Double.parseDouble(precioStr.trim());
+                                                }
+                                                String codigoStr = almacen.readLine();
+                                                if (codigoStr != null) {
+                                                        codigo = Integer.parseInt(codigoStr.trim());
+                                                }
+                                                String colorStr = almacen.readLine();
+                                                if (colorStr != null) {
+                                                        color = colorStr.trim();
+                                                }
+                                                String marcaStr = almacen.readLine();
+                                                if (marcaStr != null) {
+                                                        marca = marcaStr.trim();
+                                                }
+                                                String ventaStr = almacen.readLine();
+                                                if (ventaStr != null) {
+                                                        venta = Double.parseDouble(ventaStr.trim());
+                                                }
+                                                String cantStr = almacen.readLine();
+                                                if (cantStr != null) {
+                                                        cant = Integer.parseInt(cantStr.trim());
+                                                }
+                                                String tallaStr = almacen.readLine();
+                                                if (tallaStr != null) {
+                                                        talla = Integer.parseInt(tallaStr.trim());
+                                                }
+                                                String telaStr = almacen.readLine();
+                                                if (telaStr != null) {
+                                                        tela = telaStr.trim();
+                                                }
+                                                String estiloStr = almacen.readLine();
+                                                if (estiloStr != null) {
+                                                        estilo = estiloStr.trim();
+                                                }
+                                        } catch (NumberFormatException | IOException e) {
+                                                System.out.println("Error al procesar los datos: " + e.getMessage());
+                                        }
+
+                                        Otros nuevoOtros = new Otros(
+                                                        nombre,
+                                                        precio,
+                                                        color,
+                                                        marca,
+                                                        venta,
+                                                        cant,
+                                                        talla,
+                                                        tela,
+                                                        estilo);
+                                        nuevoOtros.setCodigo(codigo);
+                                        otrosArray[i] = nuevoOtros;
+                                        contadorArray++;
                                 }
-
-                                double precio = Double.parseDouble(almacen.readLine());
-                                String color = almacen.readLine();
-                                String marca = almacen.readLine();
-                                int talla = Integer.valueOf(almacen.readLine());
-                                String tela = almacen.readLine();
-                                String estilo = almacen.readLine();
-
-                                Otros nuevoOtros = new Otros(nombre, precio, color, marca, talla, tela, estilo);
-                                otrosArray[i] = nuevoOtros;
                         }
 
                         for (Otros otros : otrosArray) {
@@ -101,15 +154,15 @@ public class OtrosMethod {
                                         System.out.println(otros.toString());
                                 }
                         }
-
-                } catch (IOException | NumberFormatException e) {
+                } catch (IOException e) {
                         System.out.println(e);
                 }
+                almacen = contadorArray;
+
         }
 
         public static void writeToFileOtros() {
                 try {
-                        infoPantalonOtros = new File("src\\InfoProductos\\infoPantalonOtros.txt");
 
                         /*
                          * if (infoPantalonOtros.exists()) {
@@ -121,7 +174,7 @@ public class OtrosMethod {
                                 infoPantalonOtros.createNewFile();
                         }
 
-                        escribir = new FileWriter(infoPantalonOtros, true);
+                        escribir = new FileWriter(infoPantalonOtros, false);
 
                         imprimir = new PrintWriter(escribir);
 
@@ -129,8 +182,11 @@ public class OtrosMethod {
                                 if (otros != null) {
                                         imprimir.println(otros.getNombre());
                                         imprimir.println(otros.getPrecio());
+                                        imprimir.println(otros.getCodigo());
                                         imprimir.println(otros.getColor());
                                         imprimir.println(otros.getMarca());
+                                        imprimir.println(otros.getVenta());
+                                        imprimir.println(otros.getCant());
                                         imprimir.println(otros.getTalla());
                                         imprimir.println(otros.getTela());
                                         imprimir.println(otros.getEstilo());
@@ -234,6 +290,34 @@ public class OtrosMethod {
                                         if (marca == null) {
                                                 throw new NullPointerException();
                                         }
+                                        double venta;
+                                        while (true) {
+                                                try {
+                                                        venta = Double.valueOf(JOptionPane.showInputDialog(null,
+                                                                        "Ingrese la venta del Pantalon Otros"
+                                                                                        + (almacen + 1) + ":",
+                                                                        "00"));
+                                                        break;
+                                                } catch (NumberFormatException e) {
+                                                        JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                                        "Error",
+                                                                        JOptionPane.ERROR_MESSAGE);
+                                                }
+                                        }
+                                        int cant;
+                                        while (true) {
+                                                try {
+                                                        cant = Integer.valueOf(JOptionPane.showInputDialog(null,
+                                                                        "Ingrese la cantidad de stock del Pantalon Otros"
+                                                                                        + (almacen + 1) + ":",
+                                                                        "00"));
+                                                        break;
+                                                } catch (NumberFormatException e) {
+                                                        JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                                        "Error",
+                                                                        JOptionPane.ERROR_MESSAGE);
+                                                }
+                                        }
                                         int talla;
                                         while (true) {
                                                 try {
@@ -265,7 +349,7 @@ public class OtrosMethod {
                                         }
 
                                         Otros nuevoOtros = new Otros(nombre,
-                                                        precio, color, marca, talla, tela, estilo);
+                                                        precio, color, marca,venta,cant, talla, tela, estilo);
 
                                         otrosArray[almacen] = nuevoOtros;
 
@@ -548,6 +632,34 @@ public class OtrosMethod {
                                                 if (marca == null) {
                                                         throw new NullPointerException();
                                                 }
+                                                double venta;
+                                                while (true) {
+                                                        try {
+                                                                venta = Double.valueOf(JOptionPane.showInputDialog(null,
+                                                                                "Ingrese la venta del Pantalon Otros"
+                                                                                                + (almacen + 1) + ":",
+                                                                                "00"));
+                                                                break;
+                                                        } catch (NumberFormatException e) {
+                                                                JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                                                "Error",
+                                                                                JOptionPane.ERROR_MESSAGE);
+                                                        }
+                                                }
+                                                int cant;
+                                                while (true) {
+                                                        try {
+                                                                cant = Integer.valueOf(JOptionPane.showInputDialog(null,
+                                                                                "Ingrese la cantidad de stock del Pantalon Otros"
+                                                                                                + (almacen + 1) + ":",
+                                                                                "00"));
+                                                                break;
+                                                        } catch (NumberFormatException e) {
+                                                                JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                                                "Error",
+                                                                                JOptionPane.ERROR_MESSAGE);
+                                                        }
+                                                }
                                                 int talla;
                                                 while (true) {
                                                         try {
@@ -584,6 +696,8 @@ public class OtrosMethod {
                                                 otrosArray[i].setPrecio(precio);
                                                 otrosArray[i].setColor(color);
                                                 otrosArray[i].setMarca(marca);
+                                                otrosArray[i].setVenta(venta);
+                                                otrosArray[i].setCant(cant);
                                                 otrosArray[i].setTalla(talla);
                                                 otrosArray[i].setTela(tela);
                                                 otrosArray[i].setEstilo(estilo);

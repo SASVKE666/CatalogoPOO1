@@ -14,8 +14,12 @@ public class Tenis extends Zapato{
         super(codigo);
     }
 
-    public Tenis(String nombre, double precio,  String color, String marca, double talla, String material, String deporte){
-        super(nombre, precio, color, marca, talla, material);
+
+    
+
+    public Tenis(String nombre, double precio, String color, String marca, double venta, int cant,
+            double talla, String material, String deporte) {
+        super(nombre, precio, color, marca, venta, cant, talla, material);
         this.deporte = deporte;
     }
 

@@ -14,8 +14,10 @@ public class El extends Camisa{
         super(codigo);
     }
 
-    public El(String nombre, double precio,  String color, String marca, String talla, String tela, String tipo){
-        super(nombre, precio, color, marca, talla, tela);
+
+    public El(String nombre, double precio, String color, String marca, double venta, int cant, String talla,
+            String tela, String tipo) {
+        super(nombre, precio, color, marca, venta, cant, talla, tela);
         this.tipo = tipo;
     }
 

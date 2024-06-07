@@ -18,7 +18,7 @@ public class TenisMethod {
 
         static int almacen = 0;
 
-        static File infoZapatoTenis;
+        static File infoZapatoTenis = new File("src\\InfoProductos\\infoZapatoTenis.txt");
         static FileWriter escribir;
         static PrintWriter imprimir;
 
@@ -79,32 +79,78 @@ public class TenisMethod {
         }
 
         public static void readerFileTenis() {
+                int contadorArray = 0;
                 try (FileReader lector = new FileReader(infoZapatoTenis);
                                 BufferedReader almacen = new BufferedReader(lector)) {
-
+                        double precio = 0.0;
+                        int codigo = 0;
+                        String color = "";
+                        String marca = "";
+                        double venta = 0.0;
+                        int cant = 0;
+                        double talla = 0.0;
+                        String material = "";
+                        String deporte = "";
                         for (int i = 0; i < tenisArray.length; i++) {
-
                                 String nombre = almacen.readLine();
                                 if (nombre == null) {
                                         break;
+                                } else {
+                                        try {
+                                                String precioStr = almacen.readLine();
+                                                if (precioStr != null) {
+                                                        precio = Double.parseDouble(precioStr.trim());
+                                                }
+                                                String codigoStr = almacen.readLine();
+                                                if (codigoStr != null) {
+                                                        codigo = Integer.parseInt(codigoStr.trim());
+                                                }
+                                                String colorStr = almacen.readLine();
+                                                if (colorStr != null) {
+                                                        color = colorStr.trim();
+                                                }
+                                                String marcaStr = almacen.readLine();
+                                                if (marcaStr != null) {
+                                                        marca = marcaStr.trim();
+                                                }
+                                                String ventaStr = almacen.readLine();
+                                                if (ventaStr != null) {
+                                                        venta = Double.parseDouble(ventaStr.trim());
+                                                }
+                                                String cantStr = almacen.readLine();
+                                                if (cantStr != null) {
+                                                        cant = Integer.parseInt(cantStr.trim());
+                                                }
+                                                String tallaStr = almacen.readLine();
+                                                if (tallaStr != null) {
+                                                        talla = Double.parseDouble(tallaStr.trim());
+                                                }
+                                                String materialStr = almacen.readLine();
+                                                if (materialStr != null) {
+                                                        material = materialStr.trim();
+                                                }
+                                                String deporteStr = almacen.readLine();
+                                                if (deporteStr != null) {
+                                                        deporte = deporteStr.trim();
+                                                }
+                                        } catch (NumberFormatException e) {
+                                                System.out.println("Error al convertir a número: " + e.getMessage());
+                                        }
+
+                                        Tenis nuevoTenis = new Tenis(
+                                                        nombre,
+                                                        precio,
+                                                        color,
+                                                        marca,
+                                                        venta,
+                                                        cant,
+                                                        talla,
+                                                        material,
+                                                        deporte);
+                                        nuevoTenis.setCodigo(codigo);
+                                        tenisArray[i] = nuevoTenis;
+                                        contadorArray++;
                                 }
-
-                                double precio = Double.parseDouble(almacen.readLine());
-                                String color = almacen.readLine();
-                                String marca = almacen.readLine();
-                                double talla = Double.parseDouble(almacen.readLine());
-                                String material = almacen.readLine();
-                                String deporte = almacen.readLine();
-
-                                Tenis nuevoTenis = new Tenis(
-                                                nombre,
-                                                precio,
-                                                color,
-                                                marca,
-                                                talla,
-                                                material,
-                                                deporte);
-                                tenisArray[i] = nuevoTenis;
                         }
 
                         for (Tenis tenis : tenisArray) {
@@ -112,15 +158,15 @@ public class TenisMethod {
                                         System.out.println(tenis.toString());
                                 }
                         }
-
                 } catch (IOException | NumberFormatException e) {
                         System.out.println(e);
                 }
+                almacen = contadorArray;
         }
 
         public static void writeToFileTenis() {
                 try {
-                        infoZapatoTenis = new File("src\\InfoProductos\\infoZapatoTenis.txt");
+                        
 
                         /*
                          * if (infoZapatoTenis.exists()){
@@ -132,7 +178,7 @@ public class TenisMethod {
                                 infoZapatoTenis.createNewFile();
                         }
 
-                        escribir = new FileWriter(infoZapatoTenis, true);
+                        escribir = new FileWriter(infoZapatoTenis, false);
 
                         imprimir = new PrintWriter(escribir);
 
@@ -140,8 +186,11 @@ public class TenisMethod {
                                 if (tenis != null) {
                                         imprimir.println(tenis.getNombre());
                                         imprimir.println(tenis.getPrecio());
+                                        imprimir.println(tenis.getCodigo());
                                         imprimir.println(tenis.getColor());
                                         imprimir.println(tenis.getMarca());
+                                        imprimir.println(tenis.getVenta());
+                                        imprimir.println(tenis.getCant());
                                         imprimir.println(tenis.getTalla());
                                         imprimir.println(tenis.getMaterial());
                                         imprimir.println(tenis.getDeporte());
@@ -245,6 +294,34 @@ public class TenisMethod {
                                         if (marca == null) {
                                                 throw new NullPointerException();
                                         }
+                                        double venta;
+                                        while (true) {
+                                                try {
+                                                        venta = Double.valueOf(JOptionPane.showInputDialog(null,
+                                                                        "Ingrese la venta del Zapato Tenis "
+                                                                                        + (almacen + 1) + ":",
+                                                                        "00"));
+                                                        break;
+                                                } catch (NumberFormatException e) {
+                                                        JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                                        "Error",
+                                                                        JOptionPane.ERROR_MESSAGE);
+                                                }
+                                        }
+                                        int cant;
+                                        while (true) {
+                                                try {
+                                                        cant = Integer.valueOf(JOptionPane.showInputDialog(null,
+                                                                        "Ingrese la cantidad de stock del Zapato Tenis "
+                                                                                        + (almacen + 1) + ":",
+                                                                        "00"));
+                                                        break;
+                                                } catch (NumberFormatException e) {
+                                                        JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                                        "Error",
+                                                                        JOptionPane.ERROR_MESSAGE);
+                                                }
+                                        }
 
                                         double talla;
                                         while (true) {
@@ -277,7 +354,7 @@ public class TenisMethod {
                                         }
 
                                         Tenis nuevoTenis = new Tenis(nombre,
-                                                        precio, color, marca, talla, material, deporte);
+                                                        precio, color, marca, venta, cant, talla, material, deporte);
 
                                         tenisArray[almacen] = nuevoTenis;
 
@@ -566,7 +643,34 @@ public class TenisMethod {
                                                 if (marca == null) {
                                                         throw new NullPointerException();
                                                 }
-
+                                                double venta;
+                                                while (true) {
+                                                        try {
+                                                                venta = Double.valueOf(JOptionPane.showInputDialog(null,
+                                                                                "Ingrese la venta del Zapato Tenis "
+                                                                                                + (almacen + 1) + ":",
+                                                                                "00"));
+                                                                break;
+                                                        } catch (NumberFormatException e) {
+                                                                JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                                                "Error",
+                                                                                JOptionPane.ERROR_MESSAGE);
+                                                        }
+                                                }
+                                                int cant;
+                                                while (true) {
+                                                        try {
+                                                                cant = Integer.valueOf(JOptionPane.showInputDialog(null,
+                                                                                "Ingrese la cantidad de stock del Zapato Tenis "
+                                                                                                + (almacen + 1) + ":",
+                                                                                "00"));
+                                                                break;
+                                                        } catch (NumberFormatException e) {
+                                                                JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                                                "Error",
+                                                                                JOptionPane.ERROR_MESSAGE);
+                                                        }
+                                                }
                                                 double talla;
                                                 while (true) {
                                                         try {
@@ -603,6 +707,8 @@ public class TenisMethod {
                                                 tenisArray[i].setPrecio(precio);
                                                 tenisArray[i].setColor(color);
                                                 tenisArray[i].setMarca(marca);
+                                                tenisArray[i].setVenta(venta);
+                                                tenisArray[i].setCant(cant);
                                                 tenisArray[i].setTalla(talla);
                                                 tenisArray[i].setMaterial(material);
                                                 tenisArray[i].setDeporte(deporte);

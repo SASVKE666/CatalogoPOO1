@@ -36,12 +36,15 @@ public class CasualMethod {
         static PrintWriter imprimir;
 
         public static void readerFileCasual() {
-                int contadorArray = 0; 
+                int contadorArray = 0;
                 try (FileReader lector = new FileReader(infoZapatoCasual);
                                 BufferedReader almacen = new BufferedReader(lector)) {
                         double precio = 0.0;
+                        int codigo = 0;
                         String color = "";
                         String marca = "";
+                        double venta = 0.0;
+                        int cant = 0;
                         double talla = 0.0;
                         String material = "";
                         String categoria = "";
@@ -55,6 +58,10 @@ public class CasualMethod {
                                                 if (precioStr != null) {
                                                         precio = Double.parseDouble(precioStr.trim());
                                                 }
+                                                String codigoStr = almacen.readLine();
+                                                if (codigoStr != null) {
+                                                        codigo = Integer.parseInt(codigoStr.trim());
+                                                }
                                                 String colorStr = almacen.readLine();
                                                 if (colorStr != null) {
                                                         color = colorStr.trim();
@@ -62,6 +69,14 @@ public class CasualMethod {
                                                 String marcaStr = almacen.readLine();
                                                 if (marcaStr != null) {
                                                         marca = marcaStr.trim();
+                                                }
+                                                String ventaStr = almacen.readLine();
+                                                if (ventaStr != null) {
+                                                        venta = Double.parseDouble(ventaStr.trim());
+                                                }
+                                                String cantStr = almacen.readLine();
+                                                if (cantStr != null) {
+                                                        cant = Integer.parseInt(cantStr.trim());
                                                 }
                                                 String tallaStr = almacen.readLine();
                                                 if (tallaStr != null) {
@@ -74,7 +89,7 @@ public class CasualMethod {
                                                 String categoriaStr = almacen.readLine();
                                                 if (categoriaStr != null) {
                                                         categoria = categoriaStr.trim();
-                                                } 
+                                                }
 
                                         } catch (NumberFormatException e) {
                                                 System.out.println("Error al convertir a número: " + e.getMessage());
@@ -85,9 +100,12 @@ public class CasualMethod {
                                                         precio,
                                                         color,
                                                         marca,
+                                                        venta,
+                                                        cant,
                                                         talla,
                                                         material,
                                                         categoria);
+                                        newCasual.setCodigo(codigo);
                                         casualArray[i] = newCasual;
                                         contadorArray++;
                                 }
@@ -211,8 +229,11 @@ public class CasualMethod {
                                 if (casual != null) {
                                         imprimir.println(casual.getNombre());
                                         imprimir.println(casual.getPrecio());
+                                        imprimir.println(casual.getCodigo());
                                         imprimir.println(casual.getColor());
                                         imprimir.println(casual.getMarca());
+                                        imprimir.println(casual.getVenta());
+                                        imprimir.println(casual.getCant());
                                         imprimir.println(casual.getTalla());
                                         imprimir.println(casual.getMaterial());
                                         imprimir.println(casual.getCategoria());
@@ -325,6 +346,34 @@ public class CasualMethod {
                                         if (marca == null) {
                                                 throw new NullPointerException();
                                         }
+                                        double venta;
+                                        while (true) {
+                                                try {
+                                                        venta = Double.valueOf(JOptionPane.showInputDialog(null,
+                                                                        "Ingrese la venta del Zapato Casual "
+                                                                                        + (almacen + 1) + ":",
+                                                                        "00"));
+                                                        break;
+                                                } catch (NumberFormatException e) {
+                                                        JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                                        "Error",
+                                                                        JOptionPane.ERROR_MESSAGE);
+                                                }
+                                        }
+                                        int cant;
+                                        while (true) {
+                                                try {
+                                                        cant = Integer.valueOf(JOptionPane.showInputDialog(null,
+                                                                        "Ingrese la cantidad de stock del Zapato Casual "
+                                                                                        + (almacen + 1) + ":",
+                                                                        "00"));
+                                                        break;
+                                                } catch (NumberFormatException e) {
+                                                        JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                                        "Error",
+                                                                        JOptionPane.ERROR_MESSAGE);
+                                                }
+                                        }
 
                                         double talla;
                                         while (true) {
@@ -355,7 +404,7 @@ public class CasualMethod {
                                         }
 
                                         Casual nuevoCasual = new Casual(nombre,
-                                                        precio, color, marca, talla, material, categoria);
+                                                        precio, color, marca, venta, cant, talla, material, categoria);
 
                                         casualArray[almacen] = nuevoCasual;
 
@@ -640,6 +689,34 @@ public class CasualMethod {
                                                 if (marca == null) {
                                                         throw new NullPointerException();
                                                 }
+                                                double venta;
+                                                while (true) {
+                                                        try {
+                                                                venta = Double.valueOf(JOptionPane.showInputDialog(null,
+                                                                                "Ingrese la venta del Zapato Casual "
+                                                                                                + (almacen + 1) + ":",
+                                                                                "00"));
+                                                                break;
+                                                        } catch (NumberFormatException e) {
+                                                                JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                                                "Error",
+                                                                                JOptionPane.ERROR_MESSAGE);
+                                                        }
+                                                }
+                                                int cant;
+                                                while (true) {
+                                                        try {
+                                                                cant = Integer.valueOf(JOptionPane.showInputDialog(null,
+                                                                                "Ingrese la cantidad de stock del Zapato Casual "
+                                                                                                + (almacen + 1) + ":",
+                                                                                "00"));
+                                                                break;
+                                                        } catch (NumberFormatException e) {
+                                                                JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                                                "Error",
+                                                                                JOptionPane.ERROR_MESSAGE);
+                                                        }
+                                                }
 
                                                 double talla;
                                                 while (true) {
@@ -676,6 +753,8 @@ public class CasualMethod {
                                                 casualArray[i].setPrecio(precio);
                                                 casualArray[i].setColor(color);
                                                 casualArray[i].setMarca(marca);
+                                                casualArray[i].setVenta(venta);
+                                                casualArray[i].setCant(cant);
                                                 casualArray[i].setTalla(talla);
                                                 casualArray[i].setMaterial(material);
                                                 casualArray[i].setCategoria(categoria);

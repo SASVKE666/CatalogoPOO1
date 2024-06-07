@@ -1,7 +1,10 @@
-Jeans
-0.0
-COLOR
-MARCA
-0
-MATERIAL
-CORTE
+Boggy
+100.0
+102
+tela
+boggyy
+300.0
+5
+30
+jean
+recto

@@ -5,9 +5,11 @@ public class Producto {
     private String nombre;
     private double precio;
     private int codigo;
-    private String marca;
     private String color;
+    private String marca;
     private static int serie = 100;
+    private double venta;
+    private int cant;
 
     //  contructores
     public Producto(){
@@ -21,12 +23,14 @@ public class Producto {
     }
 
 
-    public Producto(String nombre, double precio, String color, String marca){
-        this.codigo = ++Producto.serie; 
+    public Producto(String nombre, double precio, String color, String marca, double venta, int cant) {
+        this.codigo = ++ Producto.serie;
         this.nombre = nombre;
-        this.marca = marca;
         this.precio = precio;
+        this.marca = marca;
         this.color = color;
+        this.venta = venta;
+        this.cant = cant;
     }
     
     //  getters
@@ -49,7 +53,7 @@ public class Producto {
     public String getMarca(){
         return this.marca;
     }
-
+    
     //  setters
     public void setNombre(String nombre){
         this.nombre = nombre;
@@ -76,7 +80,9 @@ public class Producto {
         "\nPrecio: " + this.color + 
         "\nCodigo: " + this.getCodigo() + 
         "\nColor: " + this.color +
-        "\nMarca: " +this.marca;
+        "\nMarca: " + this.marca + 
+        "\nVenta: " + this.venta + 
+        "\nCantidad: " +this.cant;
     }
 
     //  method equals()
@@ -99,6 +105,34 @@ public class Producto {
         //  if the object "codigo" are the same, return true
         return this.getCodigo() == aux.getCodigo();
   
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public static int getSerie() {
+        return serie;
+    }
+
+    public static void setSerie(int serie) {
+        Producto.serie = serie;
+    }
+
+    public double getVenta() {
+        return venta;
+    }
+
+    public void setVenta(double venta) {
+        this.venta = venta;
+    }
+
+    public int getCant() {
+        return cant;
+    }
+
+    public void setCant(int cant) {
+        this.cant = cant;
     }
 
 

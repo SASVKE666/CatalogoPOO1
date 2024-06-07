@@ -14,8 +14,13 @@ public class Casual extends Zapato{
         super(codigo); 
     }
 
-    public Casual(String nombre, double precio, String color, String marca, double talla, String material, String categoria){
-        super(nombre, precio, color, marca, talla, material);
+   
+
+  
+
+    public Casual(String nombre, double precio, String color, String marca, double venta, int cant,
+            double talla, String material, String categoria) {
+        super(nombre, precio, color, marca, venta, cant, talla, material);
         this.categoria = categoria;
     }
 

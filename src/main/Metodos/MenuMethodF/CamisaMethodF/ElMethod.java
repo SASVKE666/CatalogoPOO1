@@ -20,15 +20,18 @@ public class ElMethod {
 
         static int almacen = 0;
 
-        static File infoCamisaEl = new File("src\\InfoProductos\\infoCamisaEl.txt");;
+        static File infoCamisaEl = new File("src\\InfoProductos\\infoCamisaEl.txt");
         static FileWriter escribir;
         static PrintWriter imprimir;
 
         public static void readerFileEl() {
-                int contadorArray = 0; 
+                int contadorArray = 0;
                 try (FileReader lector = new FileReader(infoCamisaEl);
                                 BufferedReader almacen = new BufferedReader(lector)) {
                         double precio = 0.0;
+                        int codigo = 0;
+                        double venta = 0.0;
+                        int cant = 0;
                         String color = "";
                         String marca = "";
                         String talla = "";
@@ -46,6 +49,10 @@ public class ElMethod {
                                                 if (precioStr != null) {
                                                         precio = Double.parseDouble(precioStr.trim());
                                                 }
+                                                String codigoStr = almacen.readLine();
+                                                if (codigoStr != null) {
+                                                        codigo = Integer.parseInt(codigoStr.trim());
+                                                }
                                                 String colorStr = almacen.readLine();
                                                 if (colorStr != null) {
                                                         color = colorStr.trim();
@@ -53,6 +60,14 @@ public class ElMethod {
                                                 String marcaStr = almacen.readLine();
                                                 if (marcaStr != null) {
                                                         marca = marcaStr.trim();
+                                                }
+                                                String ventaStr = almacen.readLine();
+                                                if (ventaStr != null) {
+                                                        venta = Double.parseDouble(ventaStr.trim());
+                                                }
+                                                String cantStr = almacen.readLine();
+                                                if (cantStr != null) {
+                                                        cant = Integer.parseInt(cantStr.trim());
                                                 }
                                                 String tallaStr = almacen.readLine();
                                                 if (tallaStr != null) {
@@ -70,9 +85,10 @@ public class ElMethod {
                                                 System.out.println(e);
                                         }
 
-                                        El nuevoEl = new El(nombre, precio, color, marca, talla, tela, tipo);
+                                        El nuevoEl = new El(nombre, precio, color, marca, venta, cant, talla, tela, tipo);
+                                        nuevoEl.setCodigo(codigo);
                                         elArray[i] = nuevoEl;
-                                        contadorArray ++;
+                                        contadorArray++;
                                 }
                         }
 
@@ -158,8 +174,11 @@ public class ElMethod {
                                 if (el != null) {
                                         imprimir.println(el.getNombre());
                                         imprimir.println(el.getPrecio());
+                                        imprimir.println(el.getCodigo());
                                         imprimir.println(el.getColor());
                                         imprimir.println(el.getMarca());
+                                        imprimir.println(el.getVenta());
+                                        imprimir.println(el.getCant());
                                         imprimir.println(el.getTalla());
                                         imprimir.println(el.getTela());
                                         imprimir.println(el.getTipo());
@@ -258,6 +277,34 @@ public class ElMethod {
                                         if (marca == null) {
                                                 throw new NullPointerException();
                                         }
+                                        double venta;
+                                        while (true) {
+                                                try {
+                                                        venta = Double.valueOf(JOptionPane.showInputDialog(null,
+                                                                        "Ingrese la venta de la Camisa para El "
+                                                                                        + (almacen + 1) + ":",
+                                                                        "00"));
+                                                        break;
+                                                } catch (NumberFormatException e) {
+                                                        JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                                        "Error",
+                                                                        JOptionPane.ERROR_MESSAGE);
+                                                }
+                                        }
+                                        int cant;
+                                        while (true) {
+                                                try {
+                                                        cant = Integer.valueOf(JOptionPane.showInputDialog(null,
+                                                                        "Ingrese la cantidad de stock de la Camisa para El "
+                                                                                        + (almacen + 1) + ":",
+                                                                        "00"));
+                                                        break;
+                                                } catch (NumberFormatException e) {
+                                                        JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                                        "Error",
+                                                                        JOptionPane.ERROR_MESSAGE);
+                                                }
+                                        }
                                         String talla = JOptionPane.showInputDialog(null,
                                                         "Ingrese la talla de la Camisa para El " + (almacen + 1) + ":",
                                                         "TALLA");
@@ -280,7 +327,7 @@ public class ElMethod {
                                         }
 
                                         El nuevoEl = new El(nombre,
-                                                        precio, color, marca, talla, tela, tipo);
+                                                        precio, color, marca, venta, cant, talla, tela, tipo);
 
                                         elArray[almacen] = nuevoEl;
 
@@ -561,6 +608,34 @@ public class ElMethod {
                                                 if (marca == null) {
                                                         throw new NullPointerException();
                                                 }
+                                                double venta;
+                                                while (true) {
+                                                        try {
+                                                                venta = Double.valueOf(JOptionPane.showInputDialog(null,
+                                                                                "Ingrese la venta de la Camisa para El "
+                                                                                                + (almacen + 1) + ":",
+                                                                                "00"));
+                                                                break;
+                                                        } catch (NumberFormatException e) {
+                                                                JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                                                "Error",
+                                                                                JOptionPane.ERROR_MESSAGE);
+                                                        }
+                                                }
+                                                int cant;
+                                                while (true) {
+                                                        try {
+                                                                cant = Integer.valueOf(JOptionPane.showInputDialog(null,
+                                                                                "Ingrese la cantidad de stock de la Camisa para El "
+                                                                                                + (almacen + 1) + ":",
+                                                                                "00"));
+                                                                break;
+                                                        } catch (NumberFormatException e) {
+                                                                JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                                                "Error",
+                                                                                JOptionPane.ERROR_MESSAGE);
+                                                        }
+                                                }
                                                 String talla = JOptionPane.showInputDialog(null,
                                                                 "Ingrese la talla de la Camisa para El " + (almacen + 1)
                                                                                 + ":",
@@ -587,6 +662,8 @@ public class ElMethod {
                                                 elArray[i].setPrecio(precio);
                                                 elArray[i].setColor(color);
                                                 elArray[i].setMarca(marca);
+                                                elArray[i].setVenta(venta);
+                                                elArray[i].setCant(cant);
                                                 elArray[i].setTalla(talla);
                                                 elArray[i].setTela(tela);
                                                 elArray[i].setTipo(tipo);

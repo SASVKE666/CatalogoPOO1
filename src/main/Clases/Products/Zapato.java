@@ -16,10 +16,13 @@ public class Zapato extends Producto{
         super(codigo);
     }
 
-    public Zapato(String nombre, double precio, String color, String marca, double talla, String material){
-        super(nombre, precio,   color, marca);
-        this.talla = talla;
+    
+
+    public Zapato(String nombre, double precio, String color, String marca, double venta, int cant,
+     double talla, String material) {
+        super(nombre, precio, color, marca, venta, cant);
         this.material = material;
+        this.talla = talla;
     }
 
     //  getters

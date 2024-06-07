@@ -16,8 +16,11 @@ public class Camisa extends Producto{
         super(codigo);
     }
 
-    public Camisa(String nombre, double precio, String color, String marca, String talla, String tela){
-        super(nombre, precio, color, marca);
+ 
+
+    public Camisa(String nombre, double precio,  String color, String marca,  double venta, int cant,
+            String talla, String tela) {
+        super(nombre, precio, marca, color, venta, cant);
         this.talla = talla;
         this.tela = tela;
     }
