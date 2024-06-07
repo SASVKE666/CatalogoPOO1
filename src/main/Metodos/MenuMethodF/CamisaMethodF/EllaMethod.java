@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 
 import javax.swing.JOptionPane;
 
+import main.Clases.Producto;
 import main.Clases.Products.CamisaF.Ella;
 import main.Metodos.MenuMethodF.CamisaMethod;
 
@@ -671,6 +672,8 @@ public class EllaMethod {
                                                 if (estilo == null) {
                                                         throw new NullPointerException();
                                                 }
+
+                                                Producto.invertidoEdit(precio, cant);
 
                                                 ellaArray[i].setNombre(nombre);
                                                 ellaArray[i].setPrecio(precio);

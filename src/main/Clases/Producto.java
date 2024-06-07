@@ -10,6 +10,7 @@ public class Producto {
     private static int serie = 100;
     private double venta;
     private int cant;
+    private static double invertido;
 
     //  contructores
     public Producto(){
@@ -31,8 +32,13 @@ public class Producto {
         this.color = color;
         this.venta = venta;
         this.cant = cant;
+        invertido += (precio * cant);
     }
     
+    public static void invertidoEdit(double precio, int cant){
+        invertido += (precio * cant);
+    }
+
     //  getters
     public String getNombre(){
         return this.nombre;
@@ -77,7 +83,7 @@ public class Producto {
         return 
         /* "Serie: " + serie + */
         "\nNombre: " + this.nombre +
-        "\nPrecio: " + this.color + 
+        "\nPrecio: " + this.precio + 
         "\nCodigo: " + this.getCodigo() + 
         "\nColor: " + this.color +
         "\nMarca: " + this.marca + 
@@ -135,7 +141,12 @@ public class Producto {
         this.cant = cant;
     }
 
+    public static double getInvertido() {
+        return invertido;
+    }
 
-
+    public static void setInvertido(double invertido) {
+        Producto.invertido = invertido;
+    }
 
 }

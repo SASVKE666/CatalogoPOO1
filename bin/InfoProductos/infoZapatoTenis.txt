@@ -1,0 +1,10 @@
+AirSoft
+850.0
+104
+negro
+pato
+930.0
+34
+9.0
+tela
+volei

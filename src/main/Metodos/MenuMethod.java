@@ -2,6 +2,7 @@ package main.Metodos;
 
 import javax.swing.JOptionPane;
 
+import main.Clases.Producto;
 import main.Metodos.MenuMethodF.CamisaMethod;
 import main.Metodos.MenuMethodF.PantalonMethod;
 import main.Metodos.MenuMethodF.ZapatoMethod;
@@ -23,7 +24,7 @@ public class MenuMethod {
             do{
                 try{
 
-                    Object[] options = {"Zapato", "Camisa", "Pantalon", "Salir"};
+                    Object[] options = {"Zapato", "Camisa", "Pantalon", "Invertido", "Salir"};
 
                     selectMenu = JOptionPane.showOptionDialog(null,
                         "Seleccione una opción:",
@@ -46,8 +47,12 @@ public class MenuMethod {
                         case 2:
                         PantalonMethod.pantalon();
                         break;
-                        
+
                         case 3:
+                        initializeInvertido();
+                        break;
+                        
+                        case 4:
                         initializeWriteToFileMethods();
                         return;
                         
@@ -58,7 +63,7 @@ public class MenuMethod {
                     "Ups! Error!",
                     "ERROR MENU",JOptionPane.WARNING_MESSAGE);
                 }
-            }while(selectMenu != 3);
+            }while(selectMenu != 4);
     }
 
     public static void initializeReaderFileMethods(){
@@ -81,5 +86,9 @@ public class MenuMethod {
 
         CasualMethod.writeToFileCasual();
         TenisMethod.writeToFileTenis();
+    }
+
+    public static void initializeInvertido(){
+        JOptionPane.showMessageDialog(null, "Invertido :\n$ " + Producto.getInvertido());
     }
 }

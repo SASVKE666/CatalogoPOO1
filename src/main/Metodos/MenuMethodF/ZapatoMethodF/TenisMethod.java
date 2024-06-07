@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 
 import javax.swing.JOptionPane;
 
+import main.Clases.Producto;
 import main.Clases.Products.ZapatoF.Tenis;
 import main.Metodos.MenuMethodF.ZapatoMethod;
 
@@ -702,6 +703,8 @@ public class TenisMethod {
                                                 if (deporte == null) {
                                                         throw new NullPointerException();
                                                 }
+
+                                                Producto.invertidoEdit(precio, cant);
 
                                                 tenisArray[i].setNombre(nombre);
                                                 tenisArray[i].setPrecio(precio);

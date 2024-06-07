@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 
 import javax.swing.JOptionPane;
 
+import main.Clases.Producto;
 import main.Clases.Products.ZapatoF.Casual;
 import main.Metodos.MenuMethodF.ZapatoMethod;
 
@@ -748,6 +749,8 @@ public class CasualMethod {
                                                 if (categoria == null) {
                                                         throw new NullPointerException();
                                                 }
+
+                                                Producto.invertidoEdit(precio, cant);
 
                                                 casualArray[i].setNombre(nombre);
                                                 casualArray[i].setPrecio(precio);
